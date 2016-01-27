@@ -987,7 +987,7 @@ pre .chunk {
         box-sizing: border-box;
         height: auto;
         min-height: 160px;
-        /*padding: 15% 0;*/
+        padding: 15% 0;
     }
 
     .blog-title {
