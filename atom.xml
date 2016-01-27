@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Steinitz]]></title>
+  
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://jinzhan.github.io/"/>
+  <updated>2016-01-27T12:40:48.000Z</updated>
+  <id>http://jinzhan.github.io/</id>
+  
+  <author>
+    <name><![CDATA[Steinitz]]></name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[上线通报]]></title>
+    <link href="http://jinzhan.github.io/2016/01/27/online-notification/"/>
+    <id>http://jinzhan.github.io/2016/01/27/online-notification/</id>
+    <published>2016-01-27T12:40:48.000Z</published>
+    <updated>2016-01-27T12:40:48.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="u9879_u76EE_u56DE_u987E"><a href="#u9879_u76EE_u56DE_u987E" class="headerlink" title="项目回顾"></a>项目回顾</h2><ol>
+<li>…</li>
+<li>…</li>
+<li>…</li>
+</ol>
+<h2 id="u76F8_u5173_u6570_u636E"><a href="#u76F8_u5173_u6570_u636E" class="headerlink" title="相关数据"></a>相关数据</h2><h3 id="u7528_u6237_u884C_u4E3A"><a href="#u7528_u6237_u884C_u4E3A" class="headerlink" title="用户行为"></a>用户行为</h3><ol>
+<li>…</li>
+<li>…</li>
+<li>…</li>
+</ol>
+<h3 id="u9875_u9762PV"><a href="#u9875_u9762PV" class="headerlink" title="页面PV"></a>页面PV</h3><ol>
+<li>…</li>
+<li>…</li>
+</ol>
+<h3 id="u6E20_u9053_u5E7F_u544A_u4F4D"><a href="#u6E20_u9053_u5E7F_u544A_u4F4D" class="headerlink" title="渠道广告位"></a>渠道广告位</h3><ol>
+<li>…</li>
+<li>…</li>
+<li>…</li>
+</ol>
+<h3 id="u5546_u4E1A_u6570_u636E_2830_25_u5C0F_u6D41_u91CF_u7EDF_u8BA1_u6570_u636E_29"><a href="#u5546_u4E1A_u6570_u636E_2830_25_u5C0F_u6D41_u91CF_u7EDF_u8BA1_u6570_u636E_29" class="headerlink" title="商业数据(30%小流量统计数据)"></a>商业数据(30%小流量统计数据)</h3><ol>
+<li>…</li>
+<li>…</li>
+<li>…</li>
+</ol>
+<h2 id="u540E_u7EED"><a href="#u540E_u7EED" class="headerlink" title="后续"></a>后续</h2><ol>
+<li>…</li>
+<li>…</li>
+<li>…</li>
+</ol>
+<h2 id="PS"><a href="#PS" class="headerlink" title="PS"></a>PS</h2><p>…</p>
+<h2 id="u65B0_u7248_u6548_u679C_u793A_u4F8B"><a href="#u65B0_u7248_u6548_u679C_u793A_u4F8B" class="headerlink" title="新版效果示例"></a>新版效果示例</h2><p>…</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="u9879_u76EE_u56DE_u987E"><a href="#u9879_u76EE_u56DE_u987E" class="headerlink" title="项目回顾"></a>项目回顾</h2><ol>
+<li>…</li>
+<li>…</li>
+]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <link href="http://jinzhan.github.io/2016/01/27/hello-world/"/>
+    <id>http://jinzhan.github.io/2016/01/27/hello-world/</id>
+    <published>2016-01-27T07:58:43.000Z</published>
+    <updated>2016-01-27T07:58:43.000Z</updated>
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run_server"><a href="#Run_server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate_static_files"><a href="#Generate_static_files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy_to_remote_sites"><a href="#Deploy_to_remote_sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.]]>
+    </summary>
+    
+  </entry>
+  
+</feed>
