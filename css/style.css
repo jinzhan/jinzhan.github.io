@@ -248,7 +248,7 @@ a {
 }
 #container .left-col {
   background: rgba(255,255,255,0.85);
-  width: 300px;
+  width: 220px;
   position: fixed;
   opacity: 1;
   -webkit-transition: all 0.2s ease-in;
@@ -274,7 +274,7 @@ a {
   right: 0;
   min-height: 100%;
   background: rgba(255,255,255,0.8);
-  left: 300px;
+  left: 220px;
   width: auto;
 }
 @media screen and (max-width: 800px) {
@@ -286,6 +286,9 @@ a {
   }
   #container #header .header-nav {
     position: relative;
+    bottom: auto;
+    left: auto;
+    width: 100%;
   }
   #container .header-author.fixed {
     position: fixed;
@@ -509,7 +512,7 @@ a {
     color: #808080;
   }
   #container #tocButton:hover {
-    color: #88acdb;
+    color: #37b059;
     font-size: 1em;
   }
   #container .toc-article {
@@ -622,7 +625,7 @@ a {
   margin: 0 auto;
   position: relative;
   overflow: hidden;
-  background: #88acdb;
+  background: #37b059;
   -webkit-transition: all 0.2s ease-in;
   -webkit-box-orient: horizontal;
   -webkit-box-pack: center;
@@ -644,9 +647,9 @@ a {
 }
 #header .profilepic:hover {
   background: #fff;
-  border: 5px solid #88acdb;
-  -webkit-box-shadow: 0 0 1.5em #88acdb;
-  box-shadow: 0 0 1.5em #88acdb;
+  border: 5px solid #37b059;
+  -webkit-box-shadow: 0 0 1.5em #37b059;
+  box-shadow: 0 0 1.5em #37b059;
 }
 @-moz-keyframes profilepic {
   0% {
@@ -720,9 +723,10 @@ a {
 }
 #header .header-menu li a {
   font-size: 14px;
-  min-width: 300px;
+  min-width: 220px;
 }
 #header .switch-area {
+  margin-top: 40px;
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -743,8 +747,10 @@ a {
   transform: translate(-100%, 0);
 }
 #header .header-nav {
-  width: 100%;
-  position: absolute;
+  width: 148px;
+  position: fixed;
+  bottom: 10px;
+  left: 36px;
   -webkit-transition: -webkit-transform 0.3s ease-in;
   -moz-transition: -moz-transform 0.3s ease-in;
   -ms-transition: -ms-transform 0.3s ease-in;
@@ -757,18 +763,18 @@ a {
 }
 #header .header-nav .social li {
   display: inline-block;
-  width: 37px;
+  width: 18px;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   margin-right: 3px;
   margin-bottom: 6px;
-  font: 23px FontAwesome;
+  font: 12px FontAwesome;
   background: #6f7170;
   opacity: 0.58;
   text-align: center;
 }
 #header .header-nav .social li a {
-  line-height: 37px;
+  line-height: 18px;
   color: #fff;
 }
 #header .header-nav .social li:hover {
@@ -796,18 +802,11 @@ a {
 #header .header-nav .social #新浪微博 {
   background: url("/img/weibo.png") center no-repeat #ecc260;
 }
-#header .header-nav .social #GitHub {
-  background: url("/img/github.png") center no-repeat #fff;
-}
 #header .header-nav .social .GitHub:before {
-  content: "\f113";
-  color: transparent;
+  content: "\f09b";
 }
 #header .header-nav .social #V2EX {
   background: url("/img/v2ex.png") center no-repeat #e4cdb4;
-}
-#header .header-nav .social #RSS {
-  background: #ef7522;
 }
 #header .header-nav .social .RSS:before {
   content: "\f09e";
@@ -835,9 +834,6 @@ a {
 }
 #header .header-nav .social .LinkedIn:before {
   content: "\f0e1";
-}
-#header .header-nav .social #Email {
-  background: #6fc0e4;
 }
 #header .header-nav .social .Email:before {
   content: "\f003";
@@ -945,7 +941,7 @@ a {
   padding: 5px;
 }
 #header .switch-part3 .switch-friends-link:hover {
-  background: #88acdb;
+  background: #37b059;
   color: #fff;
 }
 #header .switch-part4 {
@@ -999,7 +995,7 @@ a {
   color: rgba(255,255,255,0.8);
 }
 .scroll a:hover {
-  background: rgba(147,181,224,0.3) !important;
+  background: #bdebb0;
 }
 .scroll a:hover .fa {
   color: #fff;
@@ -1026,11 +1022,11 @@ a {
   -webkit-appearance: none;
 }
 .hide-labels:hover {
-  color: #88acdb;
+  color: #37b059;
   opacity: 1;
 }
 #post-nav-button {
-  left: 300px;
+  left: 220px;
   top: 61.8%;
 }
 #post-nav-button a {
@@ -1059,7 +1055,7 @@ color
   text-decoration: none;
 }
 .post-list li:hover a {
-  color: #88acdb;
+  color: #37b059;
 }
 .archives-wrap {
   position: relative;
@@ -1406,7 +1402,7 @@ color
 .article-entry h4:hover,
 .article-entry h5:hover,
 .article-entry h6:hover {
-  color: #88acdb;
+  color: #37b059;
 }
 .article-entry video {
   max-width: 100%;
@@ -1497,7 +1493,7 @@ color
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
-  background: #88acdb;
+  background: #37b059;
   color: #fff;
   font-size: 0.9em;
   line-height: 1em;
@@ -1582,11 +1578,10 @@ color
 #tocButton {
   position: fixed;
   border: none;
-  left: 220px;
+  left: 140px;
   top: 382px;
   background: none;
-  font-size: 0.9em;
-  font-weight: bold;
+  line-height: 25px;
   color: #d3d3d3;
   cursor: pointer;
   font-family: inherit;
@@ -1594,11 +1589,11 @@ color
   -webkit-appearance: none; /*Remove iOS button style*/
 }
 #tocButton:hover {
-  color: #88acdb;
+  color: #37b059;
 }
 .toc-article {
   position: fixed;
-  width: 230px;
+  width: 150px;
   top: 378px;
   bottom: 1em;
   left: 0;
@@ -1620,7 +1615,7 @@ color
   color: #f48385;
 }
 #toc a:hover {
-  color: #88acdb;
+  color: #37b059;
   text-decoration: none;
 }
 #toc .toc-title {
@@ -2200,11 +2195,11 @@ pre .javascript .function {
   background: #5e5e5e;
 }
 #page-nav .current {
-  background: #88acdb;
+  background: #37b059;
   cursor: default;
 }
 #page-nav .current:hover {
-  background: #88acdb;
+  background: #37b059;
 }
 #page-nav .extend {
   color: #4d4d4d;
@@ -2622,10 +2617,10 @@ pre .javascript .function {
   border-right-color: #cfb7c4;
 }
 .tagcloud a.color5 {
-  background: #88acdb;
+  background: #37b059;
 }
 .tagcloud a.color5:before {
-  border-right-color: #88acdb;
+  border-right-color: #37b059;
 }
 .tagcloud a:hover {
   background-color: #9c9;

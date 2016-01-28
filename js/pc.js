@@ -109,5 +109,5 @@ define([], function(){
 });
 
 $(function() {
-    $(document).tooltip();
+   // $(document).tooltip();
 });
