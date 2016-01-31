@@ -2,7 +2,7 @@
 title: javascript位运算符
 date: 2015-09-20 20:29:44
 tags: operator
-
+category: algorithms
 ---
 
 ## review
@@ -116,8 +116,8 @@ var singleNumber = function(nums) {
 [refer](https://leetcode.com/problems/single-number-iii/)
 
 ## plus
-位操作的使用也能让代码变得更优雅，分享一些奇技：
+位操作的使用也能让代码变得更优雅：
 
 - ~location.indexOf('baidu.com') 		// 只有-1按位非为0
-- Math.random()*100 ^ 0    // 得到一个0~100(不含100)之间的随机数
-- ~new Date   // 加时间戳，用~比+经常可以减少一个括号
+- Math.random()*100 ^ 0    // 得到0~100(不含100)之间的随机数
+- ~new Date   // 加时间戳

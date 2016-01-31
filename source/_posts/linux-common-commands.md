@@ -1,6 +1,6 @@
 ---
 title: linux下的常用命令
-date: 2012-05-25 20:16:18
+date: 2015-05-25 20:16:18
 description:  
 tags:
 - linux
@@ -19,13 +19,13 @@ find . -name '*.js' -exec grep 'title' -rl {} \;
 xargs: 给命令传递参数的过滤器
 
 ```
-// 统计js的数量
+# 统计js的数量
 find . -name '*.js' | wc -l
 
-// 统计js文件的行数
+# 统计js文件的行数
 find . -name '*.js' | xargs wc -l
 
-// plus
+# plus
 find . -name '*.js' | xargs wc -l | sort -k2
 
 cat url-list.txt | xargs wget –c
@@ -35,7 +35,7 @@ cat url-list.txt | xargs wget –c
 批量替换
 
 ```
-// 反引号可以用$()
+# 反引号可以用$()
 sed -i '' "s/common\/data/ipad\/data/g" `grep common\/data * --exclude-dir=\.svn -rl`
 
 ```
@@ -59,8 +59,19 @@ vi中的快速注释(其实就是正则)
 awk神器
 
 ```
-// 被修改的文件
+# 被修改的文件
 svn st | grep -e 'template/|static/' | grep -e 'M|?' | awk '{print $2}'
+
+# 获取文件前10行
+awk 'FNR == 10 {print }' file.txt
+# OR
+awk 'NR == 10' file.txt
+
+# OR
+sed -n10p file.txt
+
+# OR
+tail -n+10 file.txt|head -1
 ```
 
 ## 系统命令

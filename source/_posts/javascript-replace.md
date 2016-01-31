@@ -84,5 +84,4 @@ console.log(html(tmpl, {
 })); 
 
 // My name is Steinitz, I am working in Beijing
-undefined
 ```

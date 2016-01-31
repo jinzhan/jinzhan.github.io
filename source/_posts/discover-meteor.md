@@ -1,7 +1,7 @@
 ---
 title: Meteor学习笔记
 date: 2015-10-25 20:13:23
-tag: [Meteor]
+tag: [meteor]
 ---
 
 ### 创建项目
