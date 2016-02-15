@@ -1,5 +1,5 @@
 ---
-title: javascript位运算符
+title: javascript中位运算符的应用
 date: 2015-09-20 20:29:44
 tags: operator
 category: algorithms
@@ -81,7 +81,7 @@ var singleNumber = function(nums) {
 
 ```
 
-**Anlysis**
+**Analysis**
 
 1. 同上，这个依然要用到异或；
 2. 那么，如何将最终的结果(即：所求之数的异或结果）分解出来呢
