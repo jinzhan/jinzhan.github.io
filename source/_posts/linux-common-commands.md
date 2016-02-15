@@ -1,7 +1,7 @@
 ---
 title: linux下的常用命令
 date: 2015-05-25 20:16:18
-description:  
+description: 大幅提高工作效率的的linux命令整理
 tags:
 - linux
 

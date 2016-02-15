@@ -1,6 +1,7 @@
 ---
 title: gbk编码引起的一个问题
 date: 2016-01-30 10:48:40
+description: GBK编码下，某些字符替换函数是不安全的
 tags:
 - gbk
 - php

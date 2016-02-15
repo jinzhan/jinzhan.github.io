@@ -1,6 +1,7 @@
 ---
 title: javascript前端模板
 date: 2015-12-26 18:26:39
+description: 强大的replace函数
 tags:
 - replace
 - javascript

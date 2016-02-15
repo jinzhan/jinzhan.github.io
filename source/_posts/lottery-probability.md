@@ -2,6 +2,7 @@
 title: 一个简单的概率问题
 date: 2015-09-27 09:32:42
 tags: algorithms
+description: 关于排列和组合的一些问题
 ---
 
 ## context

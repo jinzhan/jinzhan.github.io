@@ -1,8 +1,9 @@
 ---
-title: 使用js制作一个六边形边框
+title: 使用js制作六边形边框
 date: 2016-02-15 16:58:02
-description: 该网站的logo是用svg制作而成，svg的优点是矢量图形可伸缩，这里我想使用js生成一个正六边形，增加一些动画效果，让它更加生动。生成不规则的图形一定要用svg和cavnas吗...
+description: 该网站的logo是用svg制作而成，svg的优点是矢量图形可伸缩，这里我使用js生成一个正六边形，增加一些动画效果，让它更加生动。
 tags:
+- javascript
 ---
 
 <div class="hexagon-container" style="width: 300px;height: 300px;margin: 0 auto;"></div>
@@ -60,6 +61,3 @@ clip-path: unset;
 
 ### 完整的代码如下：
 [https://gist.github.com/jinzhan/31458be6c083ea3cd8f6](https://gist.github.com/jinzhan/31458be6c083ea3cd8f6)
-
-### (附手稿)
-![hexagon draft](/img/2016-02-15-hexagon-draft.jpg)

@@ -1,6 +1,7 @@
 ---
 title: javascript中位运算符的应用
 date: 2015-09-20 20:29:44
+description: 位运算符即按照内存中的位来操作数值，因此具有更好的性能
 tags: operator
 category: algorithms
 ---
