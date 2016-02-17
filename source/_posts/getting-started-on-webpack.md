@@ -1,5 +1,5 @@
 ---
-title: 学习webpack
+title: 关于webpack的资料整理
 date: 2016-02-17 11:45:02
 tags:
 description: Webpack跟百度的FIS有一些类似之处，出自Facebook的Instagram团队。自15年以来，受到国内的不少追捧。这里整理一下官网的一些介绍
