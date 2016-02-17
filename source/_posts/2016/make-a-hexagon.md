@@ -27,16 +27,17 @@ tags:
 
 ## 背景
 
-灵感来自于这个网站LOGO图案：http://www.colorhexa.com/ 的网站logo。 
+灵感来自于这个网站LOGO图案：http://www.colorhexa.com/: 
 ![colorhexa logo](http://www.colorhexa.com/static/i/logo.min.svg)
 
+## 关于clip-path
  该网站的logo是用svg制作而成，svg的优点是矢量图形可伸缩，这里我想使用js生成一个正六边形，增加一些动画效果，让它更加生动。生成不规则的图形一定要用svg和cavnas吗？其实通过css3提供的clip-path，就能胜任这个效果，基本思路：
  1. 这个正六边形的边，恰好是由30个等边三角形构成；
  2. 假设三角形的边长为`n`；则六边形的高度为：`n*6`，宽度为`n*sin60*6`；
  3. 整体用百分比，以便自适应宽高；
  
 
- ### clip-path Syntax
+### clip-path Syntax
  ```
 /* Keyword values */
 clip-path: none;
@@ -59,5 +60,8 @@ clip-path: initial;
 clip-path: unset;
 ```
 
-### 完整的代码如下：
+## 完整代码
 [https://gist.github.com/jinzhan/31458be6c083ea3cd8f6](https://gist.github.com/jinzhan/31458be6c083ea3cd8f6)
+
+## 兼容性问题
+在该图案上添加了CSS动画的transition后，在chrome下面表现良好，但是在Safari及移动端失效。经追查，CSS3的transition中的clip-path并不能被safari很好的支持了。这个就只能通过js来实现动画效果了。
