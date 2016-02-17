@@ -5,7 +5,7 @@ tags:
 description: Webpack跟百度的FIS有一些类似之处，出自Facebook的Instagram团队。自15年以来，受到国内的不少追捧。这里整理一下官网的一些介绍
 ---
 
-[Webpack](http://webpack.github.io/docs/)跟百度的[FIS](http://fis.baidu.com)有一些类似之处，出自Facebook的Instagram团队。自15年以来，受到国内的不少追捧。这里整理一下官网的一些介绍：
+[Webpack](http://webpack.github.io/docs/)跟百度的[FIS](http://fis.baidu.com)有一些类似之处，出自Facebook的Instagram团队。自15年以来，受到国内不少人的追捧。这里整理一下官网的一些介绍：
 
 
 # Motivation
@@ -193,13 +193,13 @@ And also:
 *   i18n files → something
 *   etc.
 
-    This should be as easy as:
+This should be as easy as:
 
 ```
-    require(<span class="string">"./style.css"</span>);
-    require(<span class="string">"./style.less"</span>);
-    require(<span class="string">"./template.jade"</span>);
-    require(<span class="string">"./image.png"</span>);
+    require("./style.css");
+    require("./style.less");
+    require("./template.jade");
+    require("./image.png");
 ```
 
 Read more about [Using loaders](using-loaders.html) and [Loaders](loaders.html).
@@ -217,3 +217,32 @@ Many libraries are written in different styles. Some of them are very weird…
 ## Strategy
 
 A clever parser would allow most existing code to run. If the developer does something weird it would try to find the most compatible solution.
+
+
+
+
+# Getting Started
+
+一个最简单的Webpack配置文件webpack.config.js如下所示：
+
+```
+module.exports = {
+  entry:[
+    './app/main.js'
+  ],
+  output: {
+    path: __dirname + '/assets/',
+    publicPath: "/assets/",
+    filename: 'bundle.js'
+  }
+};
+```
+
+其中entry参数定义了打包后的入口文件，数组中的所有文件会按顺序打包。每个文件进行依赖的递归查找，直到所有相关模块都被打包。output参数定义了输出文件的位置，其中常用的参数包括：
+
+- **path**: 打包文件存放的绝对路径
+- **publicPath**: 网站运行时的访问路径
+- **filename**: 打包后的文件名
+
+
+

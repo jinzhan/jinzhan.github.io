@@ -1,6 +1,6 @@
 ---
 title: Hexo Commands
-date: 2015-05-20 10:48:40
+date: 2014-05-20 10:48:40
 tag: 
 - hexo
 description: Hexo Commands, how to use Hexo to develop a github blog.
