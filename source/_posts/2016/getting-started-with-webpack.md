@@ -227,14 +227,19 @@ A clever parser would allow most existing code to run. If the developer does som
 
 ```
 module.exports = {
-  entry:[
-    './app/main.js'
-  ],
-  output: {
-    path: __dirname + '/assets/',
-    publicPath: "/assets/",
-    filename: 'bundle.js'
-  }
+    entry: [
+        "./entry.js"
+    ],
+    output: {
+        path: __dirname,
+        publicPath: "/assets/",
+        filename: "bundle.js"
+    },
+    module: {
+        loaders: [
+            { test: /\.css$/, loader: "style!css" }
+        ]
+    }
 };
 ```
 

@@ -13,15 +13,23 @@ date: 2016-01-28 11:36:26
 - [perfectionkills.com](http://perfectionkills.com/)
 - [smashingmagazine.com](https://www.smashingmagazine.com/)
 - [codepen.io](http://codepen.io/)
+- [My Post](https://github.com/jinzhan/jinzhan.github.io/tree/source/source/_posts)
+- [My Pen](http://codepen.io/jinzhan/)
 
-# Effect
+## Effect
 - [a single div](http://a.singlediv.com/)
 - [FWA](http://www.thefwa.com/)
 
+## Online Learning
+- [codecademy](https://www.codecademy.com)
+- [study.163.com - college course](http://study.163.com/curricula/cs.htm)
+- [study.163.com - internet course](http://study.163.com/curricula/internet.htm)
 
 ## Books
 - [Learning JavaScript Design Patterns](https://addyosmani.com/resources/essentialjsdesignpatterns/book/)
 - [Exploring ES6](http://exploringjs.com/es6/)
+- [Appendix A: Webpack for React](http://www.pro-react.com/materials/appendixA/)
+- [modern-frontend-tooling](http://tooling.github.io/book-of-modern-frontend-tooling/)
 
 
 ## Color Blending
@@ -31,7 +39,7 @@ date: 2016-01-28 11:36:26
 
 ## Friends
 - [颜海镜 专注Web前端](http://yanhaijing.com/)
-- [My Post](https://github.com/jinzhan/jinzhan.github.io/tree/source/source/_posts)
+
 
 ## Else
 - [front-end-bookmarks](http://www.w3cplus.com/front-end-bookmarks)
