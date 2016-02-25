@@ -40,6 +40,10 @@ date: 2016-01-28 11:36:26
 ## Friends
 - [颜海镜 专注Web前端](http://yanhaijing.com/)
 
+## Fun
+- [EMOJI CHEAT SHEET](http://www.emoji-cheat-sheet.com/)
+- [LeetCode](https://leetcode.com/problemset/algorithms/)
+- [js fun](http://www.jsfuck.com/)
 
 ## Else
 - [front-end-bookmarks](http://www.w3cplus.com/front-end-bookmarks)
