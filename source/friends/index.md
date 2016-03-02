@@ -31,6 +31,9 @@ date: 2016-01-28 11:36:26
 - [Appendix A: Webpack for React](http://www.pro-react.com/materials/appendixA/)
 - [modern-frontend-tooling](http://tooling.github.io/book-of-modern-frontend-tooling/)
 
+## Pictures
+- [unsplash](https://unsplash.com/)
+- [gratisography](http://www.gratisography.com/)
 
 ## Color Blending
 - [colorhexa](http://www.colorhexa.com/)
