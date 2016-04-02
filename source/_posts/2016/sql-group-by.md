@@ -115,7 +115,50 @@ having SUM(数量) > 10
 ```
 
 
-** 参考 **
+** Case ** 
+
+```
+--- |:--位置--:|:--分类id--:|:--cms配置id--:|:--点击量--:|:--点击uv--:|:--展现量--:|:--展现uv--:|
+select va.area, va.classId, va.cmsId, va.pv, va.uv, vb.pv, vb.uv
+from (
+    select hk_urlfields['area'] as area,
+    hk_urlfields['classId'] as classId,
+    hk_urlfields['cmsId'] as cmsId,
+    count(1) as pv, 
+    count(distinct baiduid) as uv from reduced_iknow_wap_lighttpd
+     where 
+           dt = '{@date}'
+           and hk_urlfields['pid'] = '102'
+           and hk_urlfields['page'] = 'question'
+           and hk_urlfields['action'] = 'click'
+           and hk_urlfields['area'] in ('top_banner', 'text_banner','middle_promote','bom_fix_banner')
+     group by hk_urlfields['area'], hk_urlfields['classId'], hk_urlfields['cmsId']
+) va join (
+    select ts.area as area, ts.classId as classId, ts.cmsId as cmsId, count(1) as pv, count(distinct ts.bid) as uv
+    from (
+        select transform(hk.cmsKey, hk.classId, hk.bid)
+            using '${hiveconf:HDFS_PHP} decodeCmsKey.php'
+             as (area string, cmsId string, classId string, bid string)
+            from (
+                select hk_urlfields['cmsKey'] as cmsKey,
+                        hk_urlfields['classId'] as classId,
+                        baiduid as bid
+                from reduced_iknow_wap_lighttpd
+                where 
+                dt = '{@date}'
+                and hk_urlfields['pid'] = '102'
+                and hk_urlfields['page'] = 'question'
+                and hk_urlfields['action'] = 'pv'     
+                and hk_urlfields['cmsKey'] is not NULL
+             ---- group by hk_urlfields['cmsKey'], hk_urlfields['classId'], baiduid
+            ) hk
+    ) ts group by ts.area, ts.classId, ts.cmsId
+) vb on(va.area = vb.area and va.classId = vb.classId and va.cmsId = vb.cmsId)
+
+```
+
+
+** 参考资料 **
 [http://www.cnblogs.com/rainman/archive/2013/05/01/3053703.html](http://www.cnblogs.com/rainman/archive/2013/05/01/3053703.html)
 
 
