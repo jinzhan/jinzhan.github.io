@@ -43,7 +43,7 @@ You want to be aware of what you opponent is likely to do.  There are the maniac
 
 ## The Gap Concept
 
-You need a better hand to call a raise with Than you do to make a raise with (For example, if I was first part, I will raise pairs with 9, but I won't call a raise with it).
+You need a better hand to call a raise with Than you do to make a raise with (For example, if I was first part, I will raise pairs with 9, or I would raise with it rather than call).
 
 
 ## Position
