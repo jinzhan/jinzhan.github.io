@@ -57,15 +57,15 @@ Extract more money from opponents.
 
 ## Five Reasons to Raise
 
-Get more money in pot.
+1. Get more money in pot.
 
-Limit the competition.
+2. Limit the competition.
 
-Take control of betting.
+3. Take control of betting.
 
-Make opponents define hands.
+4. Make opponents define hands.
 
-Steal BLINDS and ANTES.
+5. Steal BLINDS and ANTES.
 
 
 ## Odds and Outs
