@@ -34,8 +34,8 @@ date: 2017-03-20 23:35:09
 	flatten(a2) // [0, 1, 2, 3, 4, 5]
 
 	```
-15. 
 
+15. 写出返回值
 ```
 	let a = function (x, y, z) { return x + 10 * y + 100 * z;};
 	let b = a.bind(null, 1, 2);
