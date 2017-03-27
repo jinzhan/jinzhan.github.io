@@ -21,9 +21,9 @@ for(;i<len;i++){
 
 14.
 ```
-var flatten = function(arg){
-    return arg.reduce((prev, current, index, arr) => {
-    	Array.isArray(current) ? flatten(current) :  prev.push(current);
+var flatten = function(args){
+    return args.reduce((prev, current, index, arr) => {
+    	return prev.concat(Array.isArray(current) ? flatten(current) : current);
     }, []);
 };
 
