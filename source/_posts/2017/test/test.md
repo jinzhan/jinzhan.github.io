@@ -39,5 +39,5 @@ date: 2017-03-20 23:35:09
 ```
 	let a = function (x, y, z) { return x + 10 * y + 100 * z;};
 	let b = a.bind(null, 1, 2);
-	b(3, 2, 1); // 求表达式返回值
+	b(3, 2, 1); // 求返回值
 ```
