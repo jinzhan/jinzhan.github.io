@@ -50,3 +50,45 @@ date: 2017-03-20 23:35:09
 	|----|----|----|
 	| 7 | 5 | 9 |
 	| 6 | 3 | 2 |
+	
+18. 写出Vue生成的HTML结构
+
+```
+// html
+<div id="app">
+  <hello-world :level=level>
+   <div slot="h1">Hello Foo</div>
+   <div slot="h2">Hello Bar</div>
+  </hello-world>
+</div>
+
+// js
+Vue.component('hello-world', {
+  render: function (createElement) {
+    return createElement(
+      'h' + this.level,
+      [
+        this.$slots['h' + this.level],
+        'Hello World'
+      ]
+
+    )
+  },
+  props: {
+    level: {
+      type: Number,
+      required: true
+    }
+  }
+});
+
+new Vue({
+  el:'#app',
+  data: {
+    level: 2
+  },
+})
+```
+
+	let a2 = [0, [1, [2, [3, [4, [5]]]]]];
+	let a2 = [0, [1, [2, [3, [4, [5]]]]]];
