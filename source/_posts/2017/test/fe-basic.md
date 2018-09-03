@@ -21,7 +21,7 @@ date: 2017-03-20 23:35:09
 	```
 	提示，网站链接形式：
 	- http://www.baidu.com
-	- https://p.baidu.com/question/33546162633632336435650200/401301
+	- https://know.baidu.com/question/33546162633632336435650200/401301
 	- https://www.baidu.com/s?wd=%E7%99%BE%E5%BA%A6%E6%B4%BE&rsv_spt=1&rsv_iqid=0x9741e0c70008a553&issp=1&f=8&rsv_bp=0&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_sug3=9&rsv_sug1=9&rsv_sug7=100&rsv_sug2=0&inputT=1629&rsv_sug4=1630&rsv_sug=1
 	```
 13.  ((a,...b) => a*b.length)(1, 2, 3, 4, 5)返回值是多少;
