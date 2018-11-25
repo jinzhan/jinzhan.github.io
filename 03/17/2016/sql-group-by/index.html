@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>SQL中Group By的常见场景 | Jinzhan - A developer and designer.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="“Group By”从字面意义上理解就是根据“By”指定的规则对数据进行分组，所谓的分组就是将一个“数据集”划分成若干个“小区域”，然后针对若干个“小区域”进行数据处理。">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL中Group By的常见场景">
+<meta property="og:url" content="http://jinzhan.github.io/03/17/2016/sql-group-by/index.html">
+<meta property="og:site_name" content="Jinzhan - A developer and designer.">
+<meta property="og:description" content="“Group By”从字面意义上理解就是根据“By”指定的规则对数据进行分组，所谓的分组就是将一个“数据集”划分成若干个“小区域”，然后针对若干个“小区域”进行数据处理。">
+<meta property="og:locale" content="CN">
+<meta property="og:updated_time" content="2018-11-25T16:08:34.375Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL中Group By的常见场景">
+<meta name="twitter:description" content="“Group By”从字面意义上理解就是根据“By”指定的规则对数据进行分组，所谓的分组就是将一个“数据集”划分成若干个“小区域”，然后针对若干个“小区域”进行数据处理。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+
+
+  
+<style>
+/* 新增自定义样式 */
+@media screen and (min-width: 800px) {
+    body {
+        background:#fff!important;
+    }
+
+    #container .mid-col {
+        left: 300px;
+    }
+
+    #container .left-col {
+        background: rgba(255,255,255,0.85);
+        width: 300px;
+    }
+
+    .toc-article {
+       
+        top: 20px;
+        bottom: 1em;
+       
+    }
+    .overlay, .intrude-less {
+        display: none;
+    }
+
+    #container .left-col {
+        background:#333 !important;
+    }
+
+    .toc-article {
+        width: 280px;
+        padding-left: 20px;
+    }
+
+    .toc-article.post-list {
+        background-color: #333;
+        padding-left: 50px;
+        width: 230px;
+    }
+
+    .toc-article.post-list li {
+        color: #666;
+    }
+    
+
+    #post-nav-button {
+        left: 260px;
+        bottom: 10px;
+        top: auto;
+    }
+
+    #post-nav-button a {
+        background: none !important;
+    }
+
+    #scroll {
+        top: 50%;
+        margin-top: -64px;
+        background: #666;
+        padding: 5px;
+    }
+    
+    #scroll a {
+        background-color: transparent;
+        border-color: #999;
+    }
+
+    #scroll a:hover {
+        color:#fff;
+    }
+
+    #scroll a .fa{
+        color: #999;
+    }
+
+    #scroll a:hover .fa{
+        color: #fff;
+    }
+
+    #article-nav:hover,#article-nav {
+        background: #999;
+    }
+}
+</style>
+  
+
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/avatar.png" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">Jinzhan</a></h1>
+        </hgroup>
+
+        
+                
+
+
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">文章</a></li>
+                        
+                            <li><a href="/tags/">标签</a></li>
+                        
+                            <li><a href="/about/">关于</a></li>
+                        
+                            <li><a href="/friends/">链接</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:steinitz@qq.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/jinzhan" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/PHP/" style="font-size: 15px;">PHP</a> <a href="/tags/Poker/" style="font-size: 10px;">Poker</a> <a href="/tags/algorithms/" style="font-size: 10px;">algorithms</a> <a href="/tags/gbk/" style="font-size: 10px;">gbk</a> <a href="/tags/interview/" style="font-size: 10px;">interview</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/meteor/" style="font-size: 10px;">meteor</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/operator/" style="font-size: 10px;">operator</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/replace/" style="font-size: 10px;">replace</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/template/" style="font-size: 10px;">template</a> <a href="/tags/tip/" style="font-size: 20px;">tip</a> <a href="/tags/开发流程/" style="font-size: 10px;">开发流程</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Jinzhan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/avatar.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Jinzhan</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">文章</a></li>
+                
+                    <li><a href="/tags/">标签</a></li>
+                
+                    <li><a href="/about/">关于</a></li>
+                
+                    <li><a href="/friends/">链接</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:steinitz@qq.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/jinzhan" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-2016/sql-group-by" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/03/17/2016/sql-group-by/" class="article-date">
+      <time datetime="2016-03-17T07:16:59.000Z" itemprop="datePublished">2016-03-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SQL中Group By的常见场景
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud clearfix">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>“Group By”从字面意义上理解就是根据“By”指定的规则对数据进行分组，所谓的分组就是将一个“数据集”划分成若干个“小区域”，然后针对若干个“小区域”进行数据处理。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p><strong>原始表</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类别</th>
+<th style="text-align:center">数量</th>
+<th style="text-align:center">摘要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">a</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">a1</td>
+</tr>
+<tr>
+<td style="text-align:center">a</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">a2</td>
+</tr>
+<tr>
+<td style="text-align:center">b</td>
+<td style="text-align:center">15</td>
+<td style="text-align:center">b1</td>
+</tr>
+<tr>
+<td style="text-align:center">b</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">b2</td>
+</tr>
+<tr>
+<td style="text-align:center">a</td>
+<td style="text-align:center">15</td>
+<td style="text-align:center">a3</td>
+</tr>
+<tr>
+<td style="text-align:center">c</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">c2</td>
+</tr>
+<tr>
+<td style="text-align:center">c</td>
+<td style="text-align:center">25</td>
+<td style="text-align:center">c1</td>
+</tr>
+<tr>
+<td style="text-align:center">a</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">a2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="group-by实例"><a href="#group-by实例" class="headerlink" title="group by实例"></a>group by实例</h3><p><strong>简单group by</strong><br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select 类别, sum(数量) as 数量之和</span><br><span class="line"><span class="keyword">from</span> A</span><br><span class="line">group by 类别</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类别</th>
+<th style="text-align:center">数量之和</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">a</td>
+<td style="text-align:center">50</td>
+</tr>
+<tr>
+<td style="text-align:center">b</td>
+<td style="text-align:center">70</td>
+</tr>
+<tr>
+<td style="text-align:center">c</td>
+<td style="text-align:center">30</td>
+</tr>
+</tbody>
+</table>
+<p><strong> Group By 和 Order By </strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select 类别, sum(数量) AS 数量之和</span><br><span class="line"><span class="keyword">from</span> A</span><br><span class="line">group by 类别</span><br><span class="line">order by sum(数量) desc</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类别</th>
+<th style="text-align:center">数量之和</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">a</td>
+<td style="text-align:center">50</td>
+</tr>
+<tr>
+<td style="text-align:center">b</td>
+<td style="text-align:center">70</td>
+</tr>
+<tr>
+<td style="text-align:center">c</td>
+<td style="text-align:center">30</td>
+</tr>
+</tbody>
+</table>
+<p><strong> Group By中Select指定的字段限制 </strong></p>
+<p>在select指定的字段要么就要包含在Group By语句的后面，作为分组的依据；要么就要被包含在聚合函数中。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- 下面的sql语句是错误的：</span><br><span class="line">select 类别, sum(数量) as 数量之和, 摘要</span><br><span class="line"><span class="keyword">from</span> A</span><br><span class="line">group by 类别</span><br><span class="line">order by 类别 desc</span><br></pre></td></tr></table></figure>
+<p><strong> 聚合函数 </strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数</th>
+<th style="text-align:left">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">sum(列名)</td>
+<td style="text-align:left">求和</td>
+</tr>
+<tr>
+<td style="text-align:left">max(列名)</td>
+<td style="text-align:left">最大值</td>
+</tr>
+<tr>
+<td style="text-align:left">min(列名)</td>
+<td style="text-align:left">最小值</td>
+</tr>
+<tr>
+<td style="text-align:left">avg(列名)</td>
+<td style="text-align:left">平均值</td>
+</tr>
+<tr>
+<td style="text-align:left">count(列名)</td>
+<td style="text-align:left">除null外的记录数</td>
+</tr>
+<tr>
+<td style="text-align:left">count(*)</td>
+<td style="text-align:left">统计记录数包含null</td>
+</tr>
+<tr>
+<td style="text-align:left">count(distinct 列名)</td>
+<td style="text-align:left">除null和重复数据后记录数</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">--- 求各组平均值</span><br><span class="line">select 类别, avg(数量) AS 平均值 <span class="keyword">from</span> A<span class="built_in"> group </span>by 类别;</span><br><span class="line"></span><br><span class="line">--- 求各组记录数目</span><br><span class="line">select 类别, count(*) AS 记录数 <span class="keyword">from</span> A<span class="built_in"> group </span>by 类别;</span><br><span class="line"></span><br><span class="line">--- 求记录总数</span><br><span class="line">select 类别, sum(数量) AS 数量之和 <span class="keyword">from</span> A<span class="built_in"> group </span>by 类别;</span><br></pre></td></tr></table></figure>
+<p><strong> Having与Where的区别 </strong></p>
+<p>where 子句的作用是在对查询结果进行分组前，将不符合where条件的行去掉，即在分组之前过滤数据，where条件中不能包含聚组函数，使用where条件过滤出特定的行。</p>
+<p>having 子句的作用是筛选满足条件的组，即在分组之后过滤数据，条件中经常包含聚组函数，使用having 条件过滤出特定的组，也可以使用多个分组标准进行分组。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">--- where条件不能包含聚合函数</span><br><span class="line">select 类别, sum(数量) as 数量之和 <span class="keyword">from</span> A</span><br><span class="line">group by 类别</span><br><span class="line">having sum(数量) &gt; 18</span><br><span class="line"></span><br><span class="line">--- Having和Where的联合使用方法</span><br><span class="line">select 类别, SUM(数量)<span class="keyword">from</span> A</span><br><span class="line">where 数量 &gt; 8</span><br><span class="line">group by 类别</span><br><span class="line">having SUM(数量) &gt; 10</span><br></pre></td></tr></table></figure>
+<p><strong> Case </strong> </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--- |:--位置--:|:--分类id--:|:--cms配置id--:|:--点击量--:|:--点击uv--:|:--展现量--:|:--展现uv--:|</span></span><br><span class="line"><span class="keyword">select</span> va.area, va.classId, va.cmsId, va.pv, va.uv, vb.pv, vb.uv</span><br><span class="line"><span class="keyword">from</span> (</span><br><span class="line">    <span class="keyword">select</span> hk_urlfields[<span class="string">'area'</span>] <span class="keyword">as</span> area,</span><br><span class="line">    hk_urlfields[<span class="string">'classId'</span>] <span class="keyword">as</span> classId,</span><br><span class="line">    hk_urlfields[<span class="string">'cmsId'</span>] <span class="keyword">as</span> cmsId,</span><br><span class="line">    <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">as</span> pv, </span><br><span class="line">    <span class="keyword">count</span>(<span class="keyword">distinct</span> baiduid) <span class="keyword">as</span> uv <span class="keyword">from</span> reduced_iknow_wap_lighttpd</span><br><span class="line">     <span class="keyword">where</span> </span><br><span class="line">           dt = <span class="string">'&#123;@date&#125;'</span></span><br><span class="line">           <span class="keyword">and</span> hk_urlfields[<span class="string">'pid'</span>] = <span class="string">'102'</span></span><br><span class="line">           <span class="keyword">and</span> hk_urlfields[<span class="string">'page'</span>] = <span class="string">'question'</span></span><br><span class="line">           <span class="keyword">and</span> hk_urlfields[<span class="string">'action'</span>] = <span class="string">'click'</span></span><br><span class="line">           <span class="keyword">and</span> hk_urlfields[<span class="string">'area'</span>] <span class="keyword">in</span> (<span class="string">'top_banner'</span>, <span class="string">'text_banner'</span>,<span class="string">'middle_promote'</span>,<span class="string">'bom_fix_banner'</span>)</span><br><span class="line">     <span class="keyword">group</span> <span class="keyword">by</span> hk_urlfields[<span class="string">'area'</span>], hk_urlfields[<span class="string">'classId'</span>], hk_urlfields[<span class="string">'cmsId'</span>]</span><br><span class="line">) va <span class="keyword">join</span> (</span><br><span class="line">    <span class="keyword">select</span> ts.area <span class="keyword">as</span> area, ts.classId <span class="keyword">as</span> classId, ts.cmsId <span class="keyword">as</span> cmsId, <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">as</span> pv, <span class="keyword">count</span>(<span class="keyword">distinct</span> ts.bid) <span class="keyword">as</span> uv</span><br><span class="line">    <span class="keyword">from</span> (</span><br><span class="line">        <span class="keyword">select</span> transform(hk.cmsKey, hk.classId, hk.bid)</span><br><span class="line">            <span class="keyword">using</span> <span class="string">'$&#123;hiveconf:HDFS_PHP&#125; decodeCmsKey.php'</span></span><br><span class="line">             <span class="keyword">as</span> (area <span class="keyword">string</span>, cmsId <span class="keyword">string</span>, classId <span class="keyword">string</span>, bid <span class="keyword">string</span>)</span><br><span class="line">            <span class="keyword">from</span> (</span><br><span class="line">                <span class="keyword">select</span> hk_urlfields[<span class="string">'cmsKey'</span>] <span class="keyword">as</span> cmsKey,</span><br><span class="line">                        hk_urlfields[<span class="string">'classId'</span>] <span class="keyword">as</span> classId,</span><br><span class="line">                        baiduid <span class="keyword">as</span> bid</span><br><span class="line">                <span class="keyword">from</span> reduced_iknow_wap_lighttpd</span><br><span class="line">                <span class="keyword">where</span> </span><br><span class="line">                dt = <span class="string">'&#123;@date&#125;'</span></span><br><span class="line">                <span class="keyword">and</span> hk_urlfields[<span class="string">'pid'</span>] = <span class="string">'102'</span></span><br><span class="line">                <span class="keyword">and</span> hk_urlfields[<span class="string">'page'</span>] = <span class="string">'question'</span></span><br><span class="line">                <span class="keyword">and</span> hk_urlfields[<span class="string">'action'</span>] = <span class="string">'pv'</span>     </span><br><span class="line">                <span class="keyword">and</span> hk_urlfields[<span class="string">'cmsKey'</span>] <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">NULL</span></span><br><span class="line">             <span class="comment">---- group by hk_urlfields['cmsKey'], hk_urlfields['classId'], baiduid</span></span><br><span class="line">            ) hk</span><br><span class="line">    ) ts <span class="keyword">group</span> <span class="keyword">by</span> ts.area, ts.classId, ts.cmsId</span><br><span class="line">) vb <span class="keyword">on</span>(va.area = vb.area <span class="keyword">and</span> va.classId = vb.classId <span class="keyword">and</span> va.cmsId = vb.cmsId)</span><br></pre></td></tr></table></figure>
+<p><strong> 参考资料 </strong><br><a href="http://www.cnblogs.com/rainman/archive/2013/05/01/3053703.html" target="_blank" rel="noopener">http://www.cnblogs.com/rainman/archive/2013/05/01/3053703.html</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+      <!--
+        <p><span>本文标题:</span><a href="/03/17/2016/sql-group-by/">SQL中Group By的常见场景</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Jinzhan 的个人博客">Jinzhan</a></p>
+        <p><span>发布时间:</span>2016年03月17日 - 15时16分</p>
+        <p><span>最后更新:</span>2018年11月26日 - 00时08分</p>
+        -->
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/03/17/2016/sql-group-by/" title="SQL中Group By的常见场景">http://jinzhan.github.io/03/17/2016/sql-group-by/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://jinzhan.github.io/03/17/2016/sql-group-by/　　作者: Jinzhan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target="_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/04/05/2016/high-performance-browser-networking/">
+                    Web性能优化概述
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/02/18/2016/php-lib-collection/">
+                    PHP的一些优秀开源库
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#示例"><span class="toc-number">2.</span> <span class="toc-text">示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#group-by实例"><span class="toc-number">2.1.</span> <span class="toc-text">group by实例</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<!--
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+-->
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<!--
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+-->
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="03/17/2016/sql-group-by/" data-title="SQL中Group By的常见场景" data-url="http://jinzhan.github.io/03/17/2016/sql-group-by/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"steinitz"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/04/05/2016/high-performance-browser-networking/" title="上一篇: Web性能优化概述">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/02/18/2016/php-lib-collection/" title="下一篇: PHP的一些优秀开源库">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+        
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/08/22/2018/格鲁夫给经理人的第一课/">格鲁夫给经理人的第一课</a></li><li class="post-list-item"><a class="post-list-link" href="/05/27/2018/永远幸福的科学/">永远幸福的科学</a></li><li class="post-list-item"><a class="post-list-link" href="/04/12/2018/坚持,一种可以养成的习惯/">坚持,一种可以养成的习惯</a></li><li class="post-list-item"><a class="post-list-link" href="/03/19/2018/关键时刻/">关键时刻</a></li><li class="post-list-item"><a class="post-list-link" href="/03/16/2018/你充满电了吗/">你充满电了吗？</a></li><li class="post-list-item"><a class="post-list-link" href="/03/20/2017/interview-question/">Web前端面试题(2017年)</a></li><li class="post-list-item"><a class="post-list-link" href="/08/03/2016/sed-n/">sed命令中的N</a></li><li class="post-list-item"><a class="post-list-link" href="/05/25/2016/Top-Five-Texas-Holdem-Poker-Skills/">Texas Holdem Poker Skills</a></li><li class="post-list-item"><a class="post-list-link" href="/04/23/2016/summary-of-code-complete/">Code Complete笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/04/18/2016/how-to-analyze-log/">如何进行日志分析</a></li><li class="post-list-item"><a class="post-list-link" href="/04/16/2016/template-regist-function/">前端模板分析</a></li><li class="post-list-item"><a class="post-list-link" href="/04/16/2016/getting-start-to-use-nginx/">学习使用nginx</a></li><li class="post-list-item"><a class="post-list-link" href="/04/15/2016/how-to-make-a-interview/">如何做到高效面试</a></li><li class="post-list-item"><a class="post-list-link" href="/04/05/2016/high-performance-browser-networking/">Web性能优化概述</a></li><li class="post-list-item"><a class="post-list-link" href="/03/17/2016/sql-group-by/">SQL中Group By的常见场景</a></li><li class="post-list-item"><a class="post-list-link" href="/02/18/2016/php-lib-collection/">PHP的一些优秀开源库</a></li><li class="post-list-item"><a class="post-list-link" href="/02/18/2016/think-php-data-handle/">ThinkPHP数据模型相关操作</a></li><li class="post-list-item"><a class="post-list-link" href="/02/17/2016/getting-started-with-webpack/">关于webpack的资料整理(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/02/15/2016/make-a-hexagon/">使用js制作六边形边框</a></li><li class="post-list-item"><a class="post-list-link" href="/01/30/2015/gbk-issue/">gbk编码引起的一个问题</a></li><li class="post-list-item"><a class="post-list-link" href="/12/26/2015/javascript-replace/">javascript前端模板</a></li><li class="post-list-item"><a class="post-list-link" href="/11/07/2015/tips-2015-11/">前端一些小技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/10/25/2015/discover-meteor/">Meteor学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/09/27/2015/lottery-probability/">一个简单的概率问题</a></li><li class="post-list-item"><a class="post-list-link" href="/09/20/2015/operator/">javascript中位运算符的应用</a></li><li class="post-list-item"><a class="post-list-link" href="/05/25/2015/linux-common-commands/">linux下的常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/09/23/2014/generate-bubbles/">使用jquery来绘制气泡效果</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 Jinzhan
+            </div>
+            <!--
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+            </div>
+            -->
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit">本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <style>
+        body {
+          background: lightgray;
+        }
+        #container .left-col {
+          background: white;
+        }
+        .article-inner {
+          background: white;
+          margin-bottom: 1em;
+        }
+        .post-nav-button {
+          background: #ececec;
+        }
+        #header .header-nav .social #GitHub {
+          // background-color: #bfd3ec;
+        }
+        #post-nav-button a {
+          background: rgba(215, 216, 215, .2);
+        }
+        .post-list {
+          background: white;
+        }
+    </style>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

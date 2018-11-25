@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>gbk编码引起的一个问题 | Jinzhan - A developer and designer.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="GBK编码下，某些字符替换函数是不安全的">
+<meta name="keywords" content="gbk,php">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gbk编码引起的一个问题">
+<meta property="og:url" content="http://jinzhan.github.io/01/30/2015/gbk-issue/index.html">
+<meta property="og:site_name" content="Jinzhan - A developer and designer.">
+<meta property="og:description" content="GBK编码下，某些字符替换函数是不安全的">
+<meta property="og:locale" content="CN">
+<meta property="og:updated_time" content="2018-11-25T16:08:34.371Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gbk编码引起的一个问题">
+<meta name="twitter:description" content="GBK编码下，某些字符替换函数是不安全的">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+
+
+  
+<style>
+/* 新增自定义样式 */
+@media screen and (min-width: 800px) {
+    body {
+        background:#fff!important;
+    }
+
+    #container .mid-col {
+        left: 300px;
+    }
+
+    #container .left-col {
+        background: rgba(255,255,255,0.85);
+        width: 300px;
+    }
+
+    .toc-article {
+       
+        top: 20px;
+        bottom: 1em;
+       
+    }
+    .overlay, .intrude-less {
+        display: none;
+    }
+
+    #container .left-col {
+        background:#333 !important;
+    }
+
+    .toc-article {
+        width: 280px;
+        padding-left: 20px;
+    }
+
+    .toc-article.post-list {
+        background-color: #333;
+        padding-left: 50px;
+        width: 230px;
+    }
+
+    .toc-article.post-list li {
+        color: #666;
+    }
+    
+
+    #post-nav-button {
+        left: 260px;
+        bottom: 10px;
+        top: auto;
+    }
+
+    #post-nav-button a {
+        background: none !important;
+    }
+
+    #scroll {
+        top: 50%;
+        margin-top: -64px;
+        background: #666;
+        padding: 5px;
+    }
+    
+    #scroll a {
+        background-color: transparent;
+        border-color: #999;
+    }
+
+    #scroll a:hover {
+        color:#fff;
+    }
+
+    #scroll a .fa{
+        color: #999;
+    }
+
+    #scroll a:hover .fa{
+        color: #fff;
+    }
+
+    #article-nav:hover,#article-nav {
+        background: #999;
+    }
+}
+</style>
+  
+
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/avatar.png" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">Jinzhan</a></h1>
+        </hgroup>
+
+        
+                
+
+
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">文章</a></li>
+                        
+                            <li><a href="/tags/">标签</a></li>
+                        
+                            <li><a href="/about/">关于</a></li>
+                        
+                            <li><a href="/friends/">链接</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:steinitz@qq.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/jinzhan" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/PHP/" style="font-size: 15px;">PHP</a> <a href="/tags/Poker/" style="font-size: 10px;">Poker</a> <a href="/tags/algorithms/" style="font-size: 10px;">algorithms</a> <a href="/tags/gbk/" style="font-size: 10px;">gbk</a> <a href="/tags/interview/" style="font-size: 10px;">interview</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/meteor/" style="font-size: 10px;">meteor</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/operator/" style="font-size: 10px;">operator</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/replace/" style="font-size: 10px;">replace</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/template/" style="font-size: 10px;">template</a> <a href="/tags/tip/" style="font-size: 20px;">tip</a> <a href="/tags/开发流程/" style="font-size: 10px;">开发流程</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Jinzhan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/avatar.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Jinzhan</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">文章</a></li>
+                
+                    <li><a href="/tags/">标签</a></li>
+                
+                    <li><a href="/about/">关于</a></li>
+                
+                    <li><a href="/friends/">链接</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:steinitz@qq.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/jinzhan" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-2015/gbk-issue" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/01/30/2015/gbk-issue/" class="article-date">
+      <time datetime="2016-01-30T02:48:40.000Z" itemprop="datePublished">2016-01-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      gbk编码引起的一个问题
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud clearfix">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gbk/">gbk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h2><p>最近在一个项目中，由于转义的问题，导致页面出现报错。检查以后，发现是<code>单引号</code>引起的，但是转义其实已经做了如下处理：</p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-init</span>=<span class="string">'content="</span></span></span><span class="template-tag">&#123;%$<span class="name">data</span>.content|replace:<span class="string">"'"</span>:'\"'|replace:<span class="string">'"'</span>:'\"'%&#125;</span><span class="xml"><span class="tag"><span class="string">"'</span>&gt;</span> ... <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>奇怪的是，内容中的多个<code>单引号</code>，有一个<code>单引号</code>未被替换掉。</p>
+<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>代码用到的是PHP的smarty模块，这里的replace等同于PHP函数的 str_replace()，即：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str_replace(<span class="string">'\'</span><span class="string">', '</span>\\\<span class="string">''</span>, <span class="variable">$data</span>.content);</span><br></pre></td></tr></table></figure>
+<p>这里是没有任何问题，那问题在哪儿呢？事出反常必有妖。那一定是某个特定环境的问题，如是，我想到的是项目中的GBK编码所致。</p>
+<p>首先，gbk编码是采用双字节：</p>
+<h3 id="GBK字符集范围"><a href="#GBK字符集范围" class="headerlink" title="GBK字符集范围"></a>GBK字符集范围</h3><h4 id="GB2312字符集"><a href="#GB2312字符集" class="headerlink" title="GB2312字符集"></a>GB2312字符集</h4><ul>
+<li>作用：国家简体中文字符集，兼容ASCII。</li>
+<li>位数：使用2个字节表示，能表示7445个符号，包括6763个汉字，几乎覆盖所有高频率汉字。</li>
+<li>范围：高字节从A1到F7, 低字节从A1到FE。将高字节和低字节分别加上0XA0即可得到编码。</li>
+</ul>
+<h4 id="GBK字符集"><a href="#GBK字符集" class="headerlink" title="GBK字符集"></a>GBK字符集</h4><ul>
+<li>作用：它是GB2312的扩展，加入对繁体字的支持，兼容GB2312。</li>
+<li>位数：使用2个字节表示，可表示21886个字符。</li>
+<li>范围：高字节从81到FE，低字节从40到FE。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>分区</th>
+<th>高位</th>
+<th>低位</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GBK/1</td>
+<td>A1~A9</td>
+<td>A1~FE</td>
+<td>GB2312非汉字符号</td>
+</tr>
+<tr>
+<td>GBK/2</td>
+<td>B0~F7</td>
+<td>A1~FE</td>
+<td>GB2312汉字</td>
+</tr>
+<tr>
+<td>GBK/3</td>
+<td>81~A0</td>
+<td>40~FE</td>
+<td>扩充汉字</td>
+</tr>
+<tr>
+<td>GBK/4</td>
+<td>AA~FE</td>
+<td>40~A0</td>
+<td>扩充汉字</td>
+</tr>
+<tr>
+<td>GBK/5</td>
+<td>A8~A9</td>
+<td>40~A0</td>
+<td>扩充非汉字</td>
+</tr>
+</tbody>
+</table>
+<p>PS:1和2对应的GB2312字符集</p>
+<h4 id="ascii编码"><a href="#ascii编码" class="headerlink" title="ascii编码"></a>ascii编码</h4><ul>
+<li>作用：表语英语及西欧语言。</li>
+<li>位数：ASCII是用7位表示的，能表示128个字符；其扩展使用8位表示，表示256个字符。</li>
+<li>范围：ASCII从00到7F，扩展从00到FF</li>
+</ul>
+<p>GB2312的编码范围为2121H-777EH，与ASCII有重叠。</p>
+<h4 id="str-replace"><a href="#str-replace" class="headerlink" title="str_replace"></a>str_replace</h4><p>str_replace的原理是按照ascii编码进行查找替换，不是多字节安全的；GBK编码下的一个经典问题，就是字符替换后的乱码问题；一个例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">"Content-type:text/html;charset=GBK"</span>);</span><br><span class="line"><span class="variable">$str</span> = <span class="string">"叫你姨"</span>;</span><br><span class="line"><span class="variable">$str</span> = iconv(<span class="string">'UTF-8'</span>,<span class="string">'GBK'</span>, <span class="variable">$str</span>);</span><br><span class="line"><span class="variable">$rs</span>= iconv(<span class="string">'UTF-8'</span>,<span class="string">'GBK'</span>, <span class="string">'心'</span>);</span><br><span class="line"><span class="variable">$str</span> = str_replace(<span class="variable">$rs</span>, <span class="string">''</span>, <span class="variable">$str</span>);</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$str</span>;</span><br></pre></td></tr></table></figure>
+<p>猜猜会输出什么？</p>
+<h5 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h5><ol>
+<li>通过bin2hex($str)转码：</li>
+<li><code>叫你姨</code>的GBK编码为<code>BDD0 C4E3 D2CC</code>，</li>
+<li><code>心</code>的GBK编码为<code>D0C4</code></li>
+<li>经过str_replace的替换，结果就变成了<code>BDE3 D2CC</code></li>
+<li>echo pack(‘N’, hexdec(‘BDE3D2CC’)); </li>
+</ol>
+<p>结果是：姐姨</p>
+<h4 id="continue"><a href="#continue" class="headerlink" title="continue"></a>continue</h4><p>回到这个问题，替换前的转码为：</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span><span class="keyword">c</span><span class="number">703</span>ed<span class="number">7</span>f<span class="number">7</span>ceaab<span class="number">7</span>f<span class="number">0</span>bdccd<span class="number">2</span>d<span class="number">5</span>caf<span class="number">5</span><span class="keyword">c</span><span class="number">6</span>b<span class="number">7</span>a<span class="number">3</span>acccc<span class="number">6</span>bfa<span class="number">8</span>d<span class="number">3</span>d<span class="number">0</span><span class="keyword">c</span><span class="number">7e5</span>bebbb<span class="number">5</span><span class="keyword">c</span><span class="number">4</span>cff<span class="number">3</span>d<span class="number">5</span>f<span class="number">7</span>d<span class="number">2e2</span>d<span class="number">2e5</span>a<span class="number">3</span>acbeadb<span class="number">9</span>fd<span class="number">266</span><span class="keyword">c</span><span class="number">6471756</span>f<span class="number">3</span>bbfaab<span class="number">9e226726471756</span>f<span class="number">3</span>bb<span class="number">5</span><span class="keyword">c</span><span class="number">4</span><span class="keyword">ccc</span><span class="number">6</span>bfa<span class="number">8</span>d<span class="number">4</span>dab<span class="number">1</span>b<span class="number">3</span>baf<span class="number">3</span>bfc<span class="number">9</span>bfb<span class="number">4</span>b<span class="number">5</span>bd<span class="number">2220</span>cecb<span class="number">22</span>a<span class="number">1</span>a<span class="number">22220</span>b<span class="number">0</span>a<span class="number">122</span>a<span class="number">1</span>a<span class="number">22220</span>bae<span class="number">422</span>a<span class="number">3</span>a<span class="number">8</span>d<span class="number">2</span>f<span class="number">4</span>d<span class="number">2</span>eba<span class="number">3</span>a<span class="number">9</span><span class="keyword">c</span><span class="number">8</span>fdb<span class="number">8</span>f<span class="number">6e8</span>f<span class="number">3</span>cec<span class="number">4</span>d<span class="number">7</span>d<span class="number">6</span>a<span class="number">3</span>acbfaab<span class="number">9e2</span>baf<span class="number">3</span>b<span class="number">5</span><span class="keyword">c</span><span class="number">4</span><span class="keyword">ccc</span><span class="number">6</span>bfa<span class="number">8</span>d<span class="number">2</span>d<span class="number">4</span>b<span class="number">9</span>a<span class="number">9</span>b<span class="number">7</span>eed<span class="number">4</span>dacbc<span class="number">2</span>d<span class="number">4</span>babbf<span class="number">2</span>bcd<span class="number">2</span>d<span class="number">6</span>d<span class="number">0</span>b<span class="number">7</span>f<span class="number">0</span><span class="keyword">ccc</span><span class="number">3</span>ceaad<span class="number">2</span>cba<span class="number">3</span>bbceb<span class="number">4</span>beadbfaab<span class="number">9e2</span>b<span class="number">5</span><span class="keyword">c</span><span class="number">4</span><span class="keyword">ccc</span><span class="number">6</span>bfa<span class="number">8</span>bfc<span class="number">9</span>d<span class="number">7</span>f<span class="number">7</span>ceaad<span class="number">2</span>d<span class="number">5</span>caf<span class="number">5</span><span class="keyword">c</span><span class="number">6</span>b<span class="number">7</span>b<span class="number">0</span>dab<span class="number">9</span>d<span class="number">2</span>d<span class="number">4</span>dabcd<span class="number">2</span>cda<span class="number">5</span>b<span class="number">8</span><span class="keyword">c</span><span class="number">9</span>bebbb<span class="number">4</span>a<span class="number">6</span>a<span class="number">3</span>acc<span class="number">8e7</span>bfcdccfca<span class="number">1</span>a<span class="number">2</span>cae<span class="number">9</span>b<span class="number">7</span>bfa<span class="number">3</span>accac<span class="number">7</span><span class="keyword">c</span><span class="number">7e5</span>bebbc<span class="number">9</span>edd<span class="number">0</span><span class="keyword">c</span><span class="number">4</span>a<span class="number">1</span>a<span class="number">2</span><span class="keyword">c</span><span class="number">6</span>b<span class="number">7</span>ceb<span class="number">6</span>b<span class="number">8</span>dfd<span class="number">1</span><span class="keyword">c</span><span class="number">5</span>b<span class="number">5</span><span class="keyword">c</span><span class="number">4</span>d<span class="number">2</span>d<span class="number">5</span>caf<span class="number">5</span>bcd<span class="number">1</span><span class="keyword">c</span><span class="number">6</span>b<span class="number">7</span>a<span class="number">1</span>a<span class="number">33</span><span class="keyword">c</span><span class="number">6272202</span>f<span class="number">3e4173204275646468697374206172742</span><span class="keyword">c</span><span class="number">205468616e676</span>b<span class="number">612068617320636</span><span class="keyword">c</span><span class="number">65616e20616</span>e<span class="number">6420707572652073796</span>d<span class="number">626</span>f<span class="number">6</span><span class="keyword">c</span><span class="number">697</span>a<span class="number">6174696</span>f<span class="number">6e2</span>e<span class="number">20416674657220226</span>f<span class="number">70656e696</span>e<span class="number">67206</span><span class="keyword">c</span><span class="number">6967687422207468726565205661746963616e207465787420266</span>d<span class="number">646173683</span>b<span class="number">266</span>d<span class="number">646173683</span>b<span class="number">224</span>f<span class="number">6</span>d<span class="number">222</span><span class="keyword">c</span><span class="number">20224168222</span><span class="keyword">c</span><span class="number">2022486</span>f<span class="number">6e672220287472616</span>e<span class="number">736</span><span class="keyword">c</span><span class="number">697465726174696</span>f<span class="number">6e292063616</span>e<span class="number">206265207365656e20696</span>e<span class="number">20746865206261636</span>b<span class="number">67726</span>f<span class="number">756e64206</span>f<span class="number">66207468616e676</span>b<span class="number">612e205468656</span>e<span class="number">207468616e676</span>b<span class="number">612073686</span>f<span class="number">756</span><span class="keyword">c</span><span class="number">6420626520617070726</span>f<span class="number">7072696174656</span><span class="keyword">c</span><span class="number">7920776</span>f<span class="number">727368697070656420696e207468652074656</span>d<span class="number">706</span><span class="keyword">c</span><span class="number">65206</span>f<span class="number">7220612066616</span>d<span class="number">696</span><span class="keyword">c</span><span class="number">792068616</span><span class="keyword">c</span><span class="number">6</span><span class="keyword">c</span><span class="number">20666</span>f<span class="number">7220776</span>f<span class="number">727368697070696e67204275646468612</span>e<span class="number">20576974686</span>f<span class="number">7574206265696e67206</span>f<span class="number">70656e6564206</span><span class="keyword">c</span><span class="number">696768742</span><span class="keyword">c</span><span class="number">207468616e676</span>b<span class="number">612063616e2062652068616</span>e<span class="number">67656420696e206120636</span><span class="keyword">c</span><span class="number">65616e20706</span><span class="keyword">c</span><span class="number">6163652</span><span class="keyword">c</span><span class="number">2073756368206173206</span><span class="keyword">c</span><span class="number">6976696e6720726</span>f<span class="number">6</span>f<span class="number">6</span>d<span class="number">206</span>f<span class="number">722073747564792e205468616</span>e<span class="number">676</span>b<span class="number">612069732074686520617274206</span>f<span class="number">6620656</span><span class="keyword">c</span><span class="number">6567616e742074617374652077686963682063616</span>e<span class="number">20616</span><span class="keyword">c</span><span class="number">736</span>f<span class="number">2068656</span><span class="keyword">c</span><span class="number">7020707572696679206</span>d<span class="number">656e74616</span><span class="keyword">c</span><span class="number">6974792e3</span><span class="keyword">c</span><span class="number">2</span>f<span class="number">703</span>e</span><br></pre></td></tr></table></figure>
+<p>替换后的转码为：</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span><span class="keyword">c</span><span class="number">703</span>ed<span class="number">7</span>f<span class="number">7</span>ceaab<span class="number">7</span>f<span class="number">0</span>bdccd<span class="number">2</span>d<span class="number">5</span>caf<span class="number">5</span><span class="keyword">c</span><span class="number">6</span>b<span class="number">7</span>a<span class="number">3</span>acccc<span class="number">6</span>bfa<span class="number">8</span>d<span class="number">3</span>d<span class="number">0</span><span class="keyword">c</span><span class="number">7e5</span>bebbb<span class="number">5</span><span class="keyword">c</span><span class="number">4</span>cff<span class="number">3</span>d<span class="number">5</span>f<span class="number">7</span>d<span class="number">2e2</span>d<span class="number">2e5</span>a<span class="number">3</span>acbeadb<span class="number">9</span>fd<span class="number">266</span><span class="keyword">c</span><span class="number">6471756</span>f<span class="number">3</span>bbfaab<span class="number">9e226726471756</span>f<span class="number">3</span>bb<span class="number">5</span><span class="keyword">c</span><span class="number">4</span><span class="keyword">ccc</span><span class="number">6</span>bfa<span class="number">8</span>d<span class="number">4</span>dab<span class="number">1</span>b<span class="number">3</span>baf<span class="number">3</span>bfc<span class="number">9</span>bfb<span class="number">4</span>b<span class="number">5</span>bd<span class="number">5</span><span class="keyword">c</span><span class="number">2220</span>cecb<span class="number">5</span><span class="keyword">c</span><span class="number">22</span>a<span class="number">1</span>a<span class="number">25</span><span class="keyword">c</span><span class="number">2220</span>b<span class="number">0</span>a<span class="number">15</span><span class="keyword">c</span><span class="number">22</span>a<span class="number">1</span>a<span class="number">25</span><span class="keyword">c</span><span class="number">2220</span>bae<span class="number">422</span>a<span class="number">3</span>a<span class="number">8</span>d<span class="number">2</span>f<span class="number">4</span>d<span class="number">2</span>eba<span class="number">3</span>a<span class="number">9</span><span class="keyword">c</span><span class="number">8</span>fdb<span class="number">8</span>f<span class="number">6e8</span>f<span class="number">3</span>cec<span class="number">4</span>d<span class="number">7</span>d<span class="number">6</span>a<span class="number">3</span>acbfaab<span class="number">9e2</span>baf<span class="number">3</span>b<span class="number">5</span><span class="keyword">c</span><span class="number">4</span><span class="keyword">ccc</span><span class="number">6</span>bfa<span class="number">8</span>d<span class="number">2</span>d<span class="number">4</span>b<span class="number">9</span>a<span class="number">9</span>b<span class="number">7</span>eed<span class="number">4</span>dacbc<span class="number">2</span>d<span class="number">4</span>babbf<span class="number">2</span>bcd<span class="number">2</span>d<span class="number">6</span>d<span class="number">0</span>b<span class="number">7</span>f<span class="number">0</span><span class="keyword">ccc</span><span class="number">3</span>ceaad<span class="number">2</span>cba<span class="number">3</span>bbceb<span class="number">4</span>beadbfaab<span class="number">9e2</span>b<span class="number">5</span><span class="keyword">c</span><span class="number">4</span><span class="keyword">ccc</span><span class="number">6</span>bfa<span class="number">8</span>bfc<span class="number">9</span>d<span class="number">7</span>f<span class="number">7</span>ceaad<span class="number">2</span>d<span class="number">5</span>caf<span class="number">5</span><span class="keyword">c</span><span class="number">6</span>b<span class="number">7</span>b<span class="number">0</span>dab<span class="number">9</span>d<span class="number">2</span>d<span class="number">4</span>dabcd<span class="number">2</span>cda<span class="number">5</span>b<span class="number">8</span><span class="keyword">c</span><span class="number">9</span>bebbb<span class="number">4</span>a<span class="number">6</span>a<span class="number">3</span>acc<span class="number">8e7</span>bfcdccfca<span class="number">1</span>a<span class="number">2</span>cae<span class="number">9</span>b<span class="number">7</span>bfa<span class="number">3</span>accac<span class="number">7</span><span class="keyword">c</span><span class="number">7e5</span>bebbc<span class="number">9</span>edd<span class="number">0</span><span class="keyword">c</span><span class="number">4</span>a<span class="number">1</span>a<span class="number">2</span><span class="keyword">c</span><span class="number">6</span>b<span class="number">7</span>ceb<span class="number">6</span>b<span class="number">8</span>dfd<span class="number">1</span><span class="keyword">c</span><span class="number">5</span>b<span class="number">5</span><span class="keyword">c</span><span class="number">4</span>d<span class="number">2</span>d<span class="number">5</span>caf<span class="number">5</span>bcd<span class="number">1</span><span class="keyword">c</span><span class="number">6</span>b<span class="number">7</span>a<span class="number">1</span>a<span class="number">33</span><span class="keyword">c</span><span class="number">6272202</span>f<span class="number">3e4173204275646468697374206172742</span><span class="keyword">c</span><span class="number">205468616e676</span>b<span class="number">612068617320636</span><span class="keyword">c</span><span class="number">65616e20616</span>e<span class="number">6420707572652073796</span>d<span class="number">626</span>f<span class="number">6</span><span class="keyword">c</span><span class="number">697</span>a<span class="number">6174696</span>f<span class="number">6e2</span>e<span class="number">204166746572205</span><span class="keyword">c</span><span class="number">226</span>f<span class="number">70656e696</span>e<span class="number">67206</span><span class="keyword">c</span><span class="number">696768745</span><span class="keyword">c</span><span class="number">22207468726565205661746963616e207465787420266</span>d<span class="number">646173683</span>b<span class="number">266</span>d<span class="number">646173683</span>b<span class="number">5</span><span class="keyword">c</span><span class="number">224</span>f<span class="number">6</span>d<span class="number">5</span><span class="keyword">c</span><span class="number">222</span><span class="keyword">c</span><span class="number">205</span><span class="keyword">c</span><span class="number">2241685</span><span class="keyword">c</span><span class="number">222</span><span class="keyword">c</span><span class="number">205</span><span class="keyword">c</span><span class="number">22486</span>f<span class="number">6e675</span><span class="keyword">c</span><span class="number">2220287472616e736</span><span class="keyword">c</span><span class="number">697465726174696</span>f<span class="number">6e292063616</span>e<span class="number">206265207365656e20696</span>e<span class="number">20746865206261636</span>b<span class="number">67726</span>f<span class="number">756e64206</span>f<span class="number">66207468616e676</span>b<span class="number">612e205468656</span>e<span class="number">207468616e676</span>b<span class="number">612073686</span>f<span class="number">756</span><span class="keyword">c</span><span class="number">6420626520617070726</span>f<span class="number">7072696174656</span><span class="keyword">c</span><span class="number">7920776</span>f<span class="number">727368697070656420696e207468652074656</span>d<span class="number">706</span><span class="keyword">c</span><span class="number">65206</span>f<span class="number">7220612066616</span>d<span class="number">696</span><span class="keyword">c</span><span class="number">792068616</span><span class="keyword">c</span><span class="number">6</span><span class="keyword">c</span><span class="number">20666</span>f<span class="number">7220776</span>f<span class="number">727368697070696e67204275646468612</span>e<span class="number">20576974686</span>f<span class="number">7574206265696e67206</span>f<span class="number">70656e6564206</span><span class="keyword">c</span><span class="number">696768742</span><span class="keyword">c</span><span class="number">207468616e676</span>b<span class="number">612063616e2062652068616</span>e<span class="number">67656420696e206120636</span><span class="keyword">c</span><span class="number">65616e20706</span><span class="keyword">c</span><span class="number">6163652</span><span class="keyword">c</span><span class="number">2073756368206173206</span><span class="keyword">c</span><span class="number">6976696e6720726</span>f<span class="number">6</span>f<span class="number">6</span>d<span class="number">206</span>f<span class="number">722073747564792e205468616</span>e<span class="number">676</span>b<span class="number">612069732074686520617274206</span>f<span class="number">6620656</span><span class="keyword">c</span><span class="number">6567616e742074617374652077686963682063616</span>e<span class="number">20616</span><span class="keyword">c</span><span class="number">736</span>f<span class="number">2068656</span><span class="keyword">c</span><span class="number">7020707572696679206</span>d<span class="number">656e74616</span><span class="keyword">c</span><span class="number">6974792e3</span><span class="keyword">c</span><span class="number">2</span>f<span class="number">703</span>e</span><br></pre></td></tr></table></figure>
+<p>即将<code>22</code>替换为<code>5c22</code>，替换结果中确实有一处的<code>22</code>未被替换。而这个<code>22</code>就是导致报错的问题了，为啥没有替换，猜想难道是<code>22</code>在str_replace的时候被前后分开了，但并没有…</p>
+<h3 id="Why"><a href="#Why" class="headerlink" title="Why?"></a>Why?</h3><p>在本地环境中，通过对上面的编码，进行翻转，未能复现线上的效果，这是啥原因呢？</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">header(<span class="string">"Content-type: text/html; charset=gbk"</span>); </span></span><br><span class="line"><span class="php">$content = file_get_contents(<span class="string">'./content.txt'</span>);</span></span><br><span class="line"><span class="php">$str = pack(<span class="string">"H*"</span>, $content) ;</span></span><br><span class="line"><span class="php">$str = str_replace(<span class="string">'"'</span>,<span class="string">'\"'</span>,$str);</span></span><br><span class="line"><span class="php"><span class="keyword">echo</span> $str;</span></span><br></pre></td></tr></table></figure>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>这类的问题解决方案其实也很多，比如：</p>
+<ol>
+<li>将内容转换为UTF-8，进行替换，替换完了，再转成GBK；</li>
+<li>使用双字节可靠的mb_ereg_replace进行替换；</li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+      <!--
+        <p><span>本文标题:</span><a href="/01/30/2015/gbk-issue/">gbk编码引起的一个问题</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Jinzhan 的个人博客">Jinzhan</a></p>
+        <p><span>发布时间:</span>2016年01月30日 - 10时48分</p>
+        <p><span>最后更新:</span>2018年11月26日 - 00时08分</p>
+        -->
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/01/30/2015/gbk-issue/" title="gbk编码引起的一个问题">http://jinzhan.github.io/01/30/2015/gbk-issue/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://jinzhan.github.io/01/30/2015/gbk-issue/　　作者: Jinzhan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target="_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/02/15/2016/make-a-hexagon/">
+                    使用js制作六边形边框
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/12/26/2015/javascript-replace/">
+                    javascript前端模板
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Context"><span class="toc-number">1.</span> <span class="toc-text">Context</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Analysis"><span class="toc-number">2.</span> <span class="toc-text">Analysis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GBK字符集范围"><span class="toc-number">2.1.</span> <span class="toc-text">GBK字符集范围</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GB2312字符集"><span class="toc-number">2.1.1.</span> <span class="toc-text">GB2312字符集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GBK字符集"><span class="toc-number">2.1.2.</span> <span class="toc-text">GBK字符集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ascii编码"><span class="toc-number">2.1.3.</span> <span class="toc-text">ascii编码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#str-replace"><span class="toc-number">2.1.4.</span> <span class="toc-text">str_replace</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#过程"><span class="toc-number">2.1.4.1.</span> <span class="toc-text">过程</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#continue"><span class="toc-number">2.1.5.</span> <span class="toc-text">continue</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Why"><span class="toc-number">2.2.</span> <span class="toc-text">Why?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案"><span class="toc-number">2.3.</span> <span class="toc-text">解决方案</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<!--
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+-->
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<!--
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+-->
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="01/30/2015/gbk-issue/" data-title="gbk编码引起的一个问题" data-url="http://jinzhan.github.io/01/30/2015/gbk-issue/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"steinitz"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/02/15/2016/make-a-hexagon/" title="上一篇: 使用js制作六边形边框">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/12/26/2015/javascript-replace/" title="下一篇: javascript前端模板">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+        
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/08/22/2018/格鲁夫给经理人的第一课/">格鲁夫给经理人的第一课</a></li><li class="post-list-item"><a class="post-list-link" href="/05/27/2018/永远幸福的科学/">永远幸福的科学</a></li><li class="post-list-item"><a class="post-list-link" href="/04/12/2018/坚持,一种可以养成的习惯/">坚持,一种可以养成的习惯</a></li><li class="post-list-item"><a class="post-list-link" href="/03/19/2018/关键时刻/">关键时刻</a></li><li class="post-list-item"><a class="post-list-link" href="/03/16/2018/你充满电了吗/">你充满电了吗？</a></li><li class="post-list-item"><a class="post-list-link" href="/03/20/2017/interview-question/">Web前端面试题(2017年)</a></li><li class="post-list-item"><a class="post-list-link" href="/08/03/2016/sed-n/">sed命令中的N</a></li><li class="post-list-item"><a class="post-list-link" href="/05/25/2016/Top-Five-Texas-Holdem-Poker-Skills/">Texas Holdem Poker Skills</a></li><li class="post-list-item"><a class="post-list-link" href="/04/23/2016/summary-of-code-complete/">Code Complete笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/04/18/2016/how-to-analyze-log/">如何进行日志分析</a></li><li class="post-list-item"><a class="post-list-link" href="/04/16/2016/template-regist-function/">前端模板分析</a></li><li class="post-list-item"><a class="post-list-link" href="/04/16/2016/getting-start-to-use-nginx/">学习使用nginx</a></li><li class="post-list-item"><a class="post-list-link" href="/04/15/2016/how-to-make-a-interview/">如何做到高效面试</a></li><li class="post-list-item"><a class="post-list-link" href="/04/05/2016/high-performance-browser-networking/">Web性能优化概述</a></li><li class="post-list-item"><a class="post-list-link" href="/03/17/2016/sql-group-by/">SQL中Group By的常见场景</a></li><li class="post-list-item"><a class="post-list-link" href="/02/18/2016/php-lib-collection/">PHP的一些优秀开源库</a></li><li class="post-list-item"><a class="post-list-link" href="/02/18/2016/think-php-data-handle/">ThinkPHP数据模型相关操作</a></li><li class="post-list-item"><a class="post-list-link" href="/02/17/2016/getting-started-with-webpack/">关于webpack的资料整理(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/02/15/2016/make-a-hexagon/">使用js制作六边形边框</a></li><li class="post-list-item"><a class="post-list-link" href="/01/30/2015/gbk-issue/">gbk编码引起的一个问题</a></li><li class="post-list-item"><a class="post-list-link" href="/12/26/2015/javascript-replace/">javascript前端模板</a></li><li class="post-list-item"><a class="post-list-link" href="/11/07/2015/tips-2015-11/">前端一些小技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/10/25/2015/discover-meteor/">Meteor学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/09/27/2015/lottery-probability/">一个简单的概率问题</a></li><li class="post-list-item"><a class="post-list-link" href="/09/20/2015/operator/">javascript中位运算符的应用</a></li><li class="post-list-item"><a class="post-list-link" href="/05/25/2015/linux-common-commands/">linux下的常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/09/23/2014/generate-bubbles/">使用jquery来绘制气泡效果</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 Jinzhan
+            </div>
+            <!--
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+            </div>
+            -->
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit">本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <style>
+        body {
+          background: lightgray;
+        }
+        #container .left-col {
+          background: white;
+        }
+        .article-inner {
+          background: white;
+          margin-bottom: 1em;
+        }
+        .post-nav-button {
+          background: #ececec;
+        }
+        #header .header-nav .social #GitHub {
+          // background-color: #bfd3ec;
+        }
+        #post-nav-button a {
+          background: rgba(215, 216, 215, .2);
+        }
+        .post-list {
+          background: white;
+        }
+    </style>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

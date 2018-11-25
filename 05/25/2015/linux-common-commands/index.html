@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>linux下的常用命令 | Jinzhan - A developer and designer.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="大幅提高工作效率的的linux命令整理">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux下的常用命令">
+<meta property="og:url" content="http://jinzhan.github.io/05/25/2015/linux-common-commands/index.html">
+<meta property="og:site_name" content="Jinzhan - A developer and designer.">
+<meta property="og:description" content="大幅提高工作效率的的linux命令整理">
+<meta property="og:locale" content="CN">
+<meta property="og:updated_time" content="2018-11-25T16:08:34.372Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux下的常用命令">
+<meta name="twitter:description" content="大幅提高工作效率的的linux命令整理">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+
+
+  
+<style>
+/* 新增自定义样式 */
+@media screen and (min-width: 800px) {
+    body {
+        background:#fff!important;
+    }
+
+    #container .mid-col {
+        left: 300px;
+    }
+
+    #container .left-col {
+        background: rgba(255,255,255,0.85);
+        width: 300px;
+    }
+
+    .toc-article {
+       
+        top: 20px;
+        bottom: 1em;
+       
+    }
+    .overlay, .intrude-less {
+        display: none;
+    }
+
+    #container .left-col {
+        background:#333 !important;
+    }
+
+    .toc-article {
+        width: 280px;
+        padding-left: 20px;
+    }
+
+    .toc-article.post-list {
+        background-color: #333;
+        padding-left: 50px;
+        width: 230px;
+    }
+
+    .toc-article.post-list li {
+        color: #666;
+    }
+    
+
+    #post-nav-button {
+        left: 260px;
+        bottom: 10px;
+        top: auto;
+    }
+
+    #post-nav-button a {
+        background: none !important;
+    }
+
+    #scroll {
+        top: 50%;
+        margin-top: -64px;
+        background: #666;
+        padding: 5px;
+    }
+    
+    #scroll a {
+        background-color: transparent;
+        border-color: #999;
+    }
+
+    #scroll a:hover {
+        color:#fff;
+    }
+
+    #scroll a .fa{
+        color: #999;
+    }
+
+    #scroll a:hover .fa{
+        color: #fff;
+    }
+
+    #article-nav:hover,#article-nav {
+        background: #999;
+    }
+}
+</style>
+  
+
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/avatar.png" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">Jinzhan</a></h1>
+        </hgroup>
+
+        
+                
+
+
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">文章</a></li>
+                        
+                            <li><a href="/tags/">标签</a></li>
+                        
+                            <li><a href="/about/">关于</a></li>
+                        
+                            <li><a href="/friends/">链接</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:steinitz@qq.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/jinzhan" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/PHP/" style="font-size: 15px;">PHP</a> <a href="/tags/Poker/" style="font-size: 10px;">Poker</a> <a href="/tags/algorithms/" style="font-size: 10px;">algorithms</a> <a href="/tags/gbk/" style="font-size: 10px;">gbk</a> <a href="/tags/interview/" style="font-size: 10px;">interview</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/meteor/" style="font-size: 10px;">meteor</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/operator/" style="font-size: 10px;">operator</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/replace/" style="font-size: 10px;">replace</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/template/" style="font-size: 10px;">template</a> <a href="/tags/tip/" style="font-size: 20px;">tip</a> <a href="/tags/开发流程/" style="font-size: 10px;">开发流程</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Jinzhan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/avatar.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Jinzhan</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">文章</a></li>
+                
+                    <li><a href="/tags/">标签</a></li>
+                
+                    <li><a href="/about/">关于</a></li>
+                
+                    <li><a href="/friends/">链接</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:steinitz@qq.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/jinzhan" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-2015/linux-common-commands" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/05/25/2015/linux-common-commands/" class="article-date">
+      <time datetime="2015-05-25T12:16:18.000Z" itemprop="datePublished">2015-05-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      linux下的常用命令
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud clearfix">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="文件处理"><a href="#文件处理" class="headerlink" title="文件处理"></a>文件处理</h2><p>exec的语法</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">find</span> . -<span class="built_in">name</span> <span class="string">'*.js'</span> -<span class="built_in">exec</span> grep <span class="string">'title'</span> -rl &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+<p>xargs: 给命令传递参数的过滤器</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 统计js的数量</span></span><br><span class="line">find . -name '*.js' <span class="string">| wc -l</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># 统计js文件的行数</span></span><br><span class="line">find . -name '*.js' <span class="string">| xargs wc -l</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># plus</span></span><br><span class="line">find . -name '*.js' <span class="string">| xargs wc -l | sort -k2</span></span><br><span class="line"></span><br><span class="line">cat url-list.txt <span class="string">| xargs wget –c</span></span><br></pre></td></tr></table></figure>
+<p>批量替换</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 反引号可以用$()</span><br><span class="line">sed -i <span class="string">''</span> <span class="string">"s/common\/data/ipad\/data/g"</span> `grep common\/data * --exclude-dir=\.svn -rl`</span><br></pre></td></tr></table></figure>
+<p>vi中的快速注释(其实就是正则)</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">假设是.php</span><br><span class="line"><span class="number">3</span>,<span class="number">5</span> s/^<span class="regexp">/#/g</span> 注释第<span class="number">3</span>-<span class="number">5</span>行</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>,<span class="number">5</span> s/^<span class="comment">#//g 解除3-5行的注释</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>,<span class="variable">$ </span>s/^<span class="regexp">/#/g</span> 注释整个文档。</span><br><span class="line"></span><br><span class="line"><span class="symbol">:%s/^/</span><span class="comment">#/g 注释整个文档，此法更快。</span></span><br></pre></td></tr></table></figure>
+<p>awk神器</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 被修改的文件</span></span><br><span class="line">svn st | grep -e <span class="string">'template/|static/'</span> | grep -e <span class="string">'M|?'</span> | awk <span class="string">'&#123;print $2&#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># 获取文件前10行</span></span><br><span class="line">awk <span class="string">'FNR == 10 &#123;print &#125;'</span> file.txt</span><br><span class="line"><span class="meta"># OR</span></span><br><span class="line">awk <span class="string">'NR == 10'</span> file.txt</span><br><span class="line"></span><br><span class="line"><span class="meta"># OR</span></span><br><span class="line">sed -n10p file.txt</span><br><span class="line"></span><br><span class="line"><span class="meta"># OR</span></span><br><span class="line">tail -n+<span class="number">10</span> file.txt|head <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<h2 id="系统命令"><a href="#系统命令" class="headerlink" title="系统命令"></a>系统命令</h2><p>活动的进程</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ps</span> -ef 查看正在活动的进程</span><br><span class="line"><span class="keyword">ps</span> -ef |<span class="keyword">grep</span> <span class="keyword">abc</span> 查看含有<span class="string">"abc"</span>的活动进程</span><br><span class="line"><span class="keyword">ps</span> -ef |<span class="keyword">grep</span> -v <span class="keyword">abc</span> 查看不含<span class="keyword">abc</span>的活动进程</span><br></pre></td></tr></table></figure>
+<p>后台运行</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup <span class="keyword">sh</span> <span class="keyword">test</span>.<span class="keyword">sh</span> &amp;&gt;/dev/null &amp;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+      <!--
+        <p><span>本文标题:</span><a href="/05/25/2015/linux-common-commands/">linux下的常用命令</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Jinzhan 的个人博客">Jinzhan</a></p>
+        <p><span>发布时间:</span>2015年05月25日 - 20时16分</p>
+        <p><span>最后更新:</span>2018年11月26日 - 00时08分</p>
+        -->
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/05/25/2015/linux-common-commands/" title="linux下的常用命令">http://jinzhan.github.io/05/25/2015/linux-common-commands/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://jinzhan.github.io/05/25/2015/linux-common-commands/　　作者: Jinzhan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target="_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/09/20/2015/operator/">
+                    javascript中位运算符的应用
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/09/23/2014/generate-bubbles/">
+                    使用jquery来绘制气泡效果
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#文件处理"><span class="toc-number">1.</span> <span class="toc-text">文件处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统命令"><span class="toc-number">2.</span> <span class="toc-text">系统命令</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<!--
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+-->
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<!--
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+-->
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="05/25/2015/linux-common-commands/" data-title="linux下的常用命令" data-url="http://jinzhan.github.io/05/25/2015/linux-common-commands/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"steinitz"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/09/20/2015/operator/" title="上一篇: javascript中位运算符的应用">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/09/23/2014/generate-bubbles/" title="下一篇: 使用jquery来绘制气泡效果">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+        
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/08/22/2018/格鲁夫给经理人的第一课/">格鲁夫给经理人的第一课</a></li><li class="post-list-item"><a class="post-list-link" href="/05/27/2018/永远幸福的科学/">永远幸福的科学</a></li><li class="post-list-item"><a class="post-list-link" href="/04/12/2018/坚持,一种可以养成的习惯/">坚持,一种可以养成的习惯</a></li><li class="post-list-item"><a class="post-list-link" href="/03/19/2018/关键时刻/">关键时刻</a></li><li class="post-list-item"><a class="post-list-link" href="/03/16/2018/你充满电了吗/">你充满电了吗？</a></li><li class="post-list-item"><a class="post-list-link" href="/03/20/2017/interview-question/">Web前端面试题(2017年)</a></li><li class="post-list-item"><a class="post-list-link" href="/08/03/2016/sed-n/">sed命令中的N</a></li><li class="post-list-item"><a class="post-list-link" href="/05/25/2016/Top-Five-Texas-Holdem-Poker-Skills/">Texas Holdem Poker Skills</a></li><li class="post-list-item"><a class="post-list-link" href="/04/23/2016/summary-of-code-complete/">Code Complete笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/04/18/2016/how-to-analyze-log/">如何进行日志分析</a></li><li class="post-list-item"><a class="post-list-link" href="/04/16/2016/template-regist-function/">前端模板分析</a></li><li class="post-list-item"><a class="post-list-link" href="/04/16/2016/getting-start-to-use-nginx/">学习使用nginx</a></li><li class="post-list-item"><a class="post-list-link" href="/04/15/2016/how-to-make-a-interview/">如何做到高效面试</a></li><li class="post-list-item"><a class="post-list-link" href="/04/05/2016/high-performance-browser-networking/">Web性能优化概述</a></li><li class="post-list-item"><a class="post-list-link" href="/03/17/2016/sql-group-by/">SQL中Group By的常见场景</a></li><li class="post-list-item"><a class="post-list-link" href="/02/18/2016/php-lib-collection/">PHP的一些优秀开源库</a></li><li class="post-list-item"><a class="post-list-link" href="/02/18/2016/think-php-data-handle/">ThinkPHP数据模型相关操作</a></li><li class="post-list-item"><a class="post-list-link" href="/02/17/2016/getting-started-with-webpack/">关于webpack的资料整理(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/02/15/2016/make-a-hexagon/">使用js制作六边形边框</a></li><li class="post-list-item"><a class="post-list-link" href="/01/30/2015/gbk-issue/">gbk编码引起的一个问题</a></li><li class="post-list-item"><a class="post-list-link" href="/12/26/2015/javascript-replace/">javascript前端模板</a></li><li class="post-list-item"><a class="post-list-link" href="/11/07/2015/tips-2015-11/">前端一些小技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/10/25/2015/discover-meteor/">Meteor学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/09/27/2015/lottery-probability/">一个简单的概率问题</a></li><li class="post-list-item"><a class="post-list-link" href="/09/20/2015/operator/">javascript中位运算符的应用</a></li><li class="post-list-item"><a class="post-list-link" href="/05/25/2015/linux-common-commands/">linux下的常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/09/23/2014/generate-bubbles/">使用jquery来绘制气泡效果</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 Jinzhan
+            </div>
+            <!--
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+            </div>
+            -->
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit">本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <style>
+        body {
+          background: lightgray;
+        }
+        #container .left-col {
+          background: white;
+        }
+        .article-inner {
+          background: white;
+          margin-bottom: 1em;
+        }
+        .post-nav-button {
+          background: #ececec;
+        }
+        #header .header-nav .social #GitHub {
+          // background-color: #bfd3ec;
+        }
+        #post-nav-button a {
+          background: rgba(215, 216, 215, .2);
+        }
+        .post-list {
+          background: white;
+        }
+    </style>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
