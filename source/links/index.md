@@ -5,6 +5,7 @@ date: 2016-01-28 11:36:26
 
 
 ## Source
+- [front-end-handbook](https://frontendmasters.com/books/front-end-handbook/2017/)
 - [scotch.io](https://scotch.io/)
 - [BFE](https://github.com/zenany/weekly)
 - [75team](http://www.75team.com/weekly)
