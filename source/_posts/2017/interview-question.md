@@ -1,9 +1,9 @@
 ---
-title: Web前端基础面试题 
+title: Web前端面试题(2017年) 
 date: 2017-03-20 23:35:09
 ---
 
-## 前端基础知识笔试
+## 前端基础知识
 
 1. 请写下display属性有哪些属性，每个属性的意义
 2. 写出常用的CSS选择符，至少5种，并说出他们的优先级
@@ -90,3 +90,87 @@ new Vue({
 })
 ```
 
+## 系统知识
+
+1.  为什么 0.1 + 0.2 === 0.3 为 false 
+1. 怎么画出0.5px的边框，有哪些方案
+2. 请解释进程和线程的区别
+3. 请解释下js中的事件轮询的机制
+4. 请说说你对Vue或React中虚拟dom的理解
+5. 浏览器如何判断访问本地缓存还是请求服务器
+6. 请至少说出一个你实现的组件，组件功能/参数/调用方式
+
+
+## 开放问答
+
+### 最能代表技术的案例？
+
+- 前后端怎么配合的？
+- 负责了哪个部分
+- 其中的技术难点在哪儿
+- 怎么实现的
+
+### 有哪些技术产出？
+- 有开源的项目么
+- 有做过技术分享么（组内）
+
+
+### 为什么会选择离开当前的团队呢？
+
+### 你当下最关注的技术是什么？
+
+### 未来的职业规划
+
+
+
+<div style="display:none">
+## 自问自答，哈哈哈哈
+11.
+
+```
+// 1
+$('ul').click('li', function(){
+    console.log($(this).index());
+});
+
+// 2
+var li = document.getElementsByTagName('li');
+var i = 0;
+var len = li.length;
+for(;i<len;i++){
+  !function(i){
+    li[i].onclick(function(){alert(i)});
+  }(i);
+}
+
+```
+
+14.
+```
+var flatten = function(args){
+    return args.reduce((prev, current, index, arr) => {
+    	return prev.concat(Array.isArray(current) ? flatten(current) : current);
+    }, []);
+};
+
+```
+
+
+15.
+```
+var bubbling = function(arr){
+	var len = arr.length;
+	var i;
+	while(len--) {
+		for(i = 0;i<len;i++) {
+			if(arr[i] > arr[i+1]) {
+				arr[i] ^= arr[i+1];
+				arr[i+1] ^= arr[i];
+				arr[i] ^= arr[i+1];
+			}
+		}
+	}
+	return arr;
+};
+```
+</div>
