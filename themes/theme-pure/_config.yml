@@ -31,7 +31,7 @@ site:
     width: 40
     height: 40
     url: /img/avatar.png
-  title: 问津 # 页面title
+  title: 问津的个人博客 # 页面title
   favicon: /favicon.png
   board: <p>种一棵树最好的时间是十年前，其次是现在!</p> # 站点公告
   copyright: false # 底部版权信息
@@ -56,7 +56,7 @@ pagination:
 # Sidebar
 sidebar: right
 widgets:
-  - board  
+  # - board  
   - category
   - tag
   - tagcloud
@@ -187,14 +187,14 @@ profile:
   avatar: images/avatar.jpg
   gravatar: # Gravatar email address, if you enable Gravatar, your avatar config will be overriden
   author: 问津
-  author_title: Web Developer & Designer
+  author_title: # Web Developer & Designer
   author_description: 世界上几乎所有的问题都可以用跳脱的想象力配合超凡的行动力来解决。
-  location: China
-  follow: https://github.com/jinzhan
+  location: # China
+  follow: # https://github.com/jinzhan
   # Social Links
   social:
     links:
-      github: https://github.com/jinzhan
+      # github: https://github.com/jinzhan
       # weibo: http://weibo.com/cofess
       # twitter: https://twitter.com/iwebued
       # # facebook: /
