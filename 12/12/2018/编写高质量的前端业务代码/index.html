@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang=CN>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>编写高质量的前端业务代码 | 问津的个人博客</title>
+  <meta name="description" content="代码最重要的读者就不再是编译器、解释器或者电脑了，而是人。写出的代码能让人快速理解、轻松维护、容易扩展的程序员才是专业的程序员。 在代码阅读过程中人们说脏话的频率是衡量代码质量的唯一标准。 —— Clean Code 为人写代码，而非机器。真正高手所写的代码，像水晶一样晶莹剔透，还配有文档。 编程工作的特殊性 老板无法强迫你成为优秀的coder 这是一个无法监督的工作，没人真正知道你在干什么 不同">
+<meta name="keywords" content="tip">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编写高质量的前端业务代码">
+<meta property="og:url" content="http://jinzhan.github.io/12/12/2018/编写高质量的前端业务代码/index.html">
+<meta property="og:site_name" content="问津的读书笔记和思考日记">
+<meta property="og:description" content="代码最重要的读者就不再是编译器、解释器或者电脑了，而是人。写出的代码能让人快速理解、轻松维护、容易扩展的程序员才是专业的程序员。 在代码阅读过程中人们说脏话的频率是衡量代码质量的唯一标准。 —— Clean Code 为人写代码，而非机器。真正高手所写的代码，像水晶一样晶莹剔透，还配有文档。 编程工作的特殊性 老板无法强迫你成为优秀的coder 这是一个无法监督的工作，没人真正知道你在干什么 不同">
+<meta property="og:locale" content="CN">
+<meta property="og:updated_time" content="2019-07-07T07:32:43.378Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编写高质量的前端业务代码">
+<meta name="twitter:description" content="代码最重要的读者就不再是编译器、解释器或者电脑了，而是人。写出的代码能让人快速理解、轻松维护、容易扩展的程序员才是专业的程序员。 在代码阅读过程中人们说脏话的频率是衡量代码质量的唯一标准。 —— Clean Code 为人写代码，而非机器。真正高手所写的代码，像水晶一样晶莹剔透，还配有文档。 编程工作的特殊性 老板无法强迫你成为优秀的coder 这是一个无法监督的工作，没人真正知道你在干什么 不同">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://jinzhan.github.io/12/12/2018/编写高质量的前端业务代码/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="问津的读书笔记和思考日记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+    
+        
+          <a id="avatar">
+            <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+          </a>
+        
+
+        <h2 id="name" class="hidden-xs hidden-sm">问津</h2>
+        
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        
+        
+
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope="" itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope="" itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/algorithms/">algorithms</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Poker/">Poker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithms/">algorithms</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gbk/">gbk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/interview/">interview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meteor/">meteor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/replace/">replace</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sed/">sed</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/template/">template</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tip/">tip</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发流程/">开发流程</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/PHP/" style="font-size: 13.5px;">PHP</a> <a href="/tags/Poker/" style="font-size: 13px;">Poker</a> <a href="/tags/algorithms/" style="font-size: 13px;">algorithms</a> <a href="/tags/gbk/" style="font-size: 13px;">gbk</a> <a href="/tags/interview/" style="font-size: 13px;">interview</a> <a href="/tags/javascript/" style="font-size: 13.5px;">javascript</a> <a href="/tags/linux/" style="font-size: 13px;">linux</a> <a href="/tags/meteor/" style="font-size: 13px;">meteor</a> <a href="/tags/mysql/" style="font-size: 13.5px;">mysql</a> <a href="/tags/operator/" style="font-size: 13px;">operator</a> <a href="/tags/php/" style="font-size: 13px;">php</a> <a href="/tags/replace/" style="font-size: 13px;">replace</a> <a href="/tags/sed/" style="font-size: 13px;">sed</a> <a href="/tags/template/" style="font-size: 13px;">template</a> <a href="/tags/tip/" style="font-size: 14px;">tip</a> <a href="/tags/开发流程/" style="font-size: 13px;">开发流程</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/07/07/2019/way-of-thinking/" class="title">有哪些让人受益匪浅的思维方式？</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-07-07T05:39:15.000Z" itemprop="datePublished">2019-07-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/12/12/2018/编写高质量的前端业务代码/" class="title">编写高质量的前端业务代码</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-12-12T14:28:18.000Z" itemprop="datePublished">2018-12-12</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/11/26/2018/三国史话/" class="title">三国史话</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-11-25T16:53:12.000Z" itemprop="datePublished">2018-11-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/10/12/2018/同治中兴/" class="title">同治中兴</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-10-12T14:33:02.000Z" itemprop="datePublished">2018-10-12</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/08/22/2018/格鲁夫给经理人的第一课/" class="title">格鲁夫给经理人的第一课</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-08-22T14:31:28.000Z" itemprop="datePublished">2018-08-22</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-2018/编写高质量的前端业务代码" class="article article-type-post" itemscope="" itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      编写高质量的前端业务代码
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/12/12/2018/编写高质量的前端业务代码/" class="article-date">
+	  <time datetime="2018-12-12T14:28:18.000Z" itemprop="datePublished">2018-12-12</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/tip/">tip</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/12/12/2018/编写高质量的前端业务代码/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>代码最重要的读者就不再是编译器、解释器或者电脑了，而是人。写出的代码能让人快速理解、轻松维护、容易扩展的程序员才是专业的程序员。</p>
+<p>在代码阅读过程中人们说脏话的频率是衡量代码质量的唯一标准。 —— Clean Code</p>
+<p>为人写代码，而非机器。真正高手所写的代码，像水晶一样晶莹剔透，还配有文档。</p>
+<h2 id="编程工作的特殊性"><a href="#编程工作的特殊性" class="headerlink" title="编程工作的特殊性"></a>编程工作的特殊性</h2><ul>
+<li>老板无法强迫你成为优秀的coder</li>
+<li>这是一个无法监督的工作，没人真正知道你在干什么</li>
+<li>不同人编程的时间差异可达10:1;</li>
+</ul>
+<h2 id="好的编程实践"><a href="#好的编程实践" class="headerlink" title="好的编程实践"></a>好的编程实践</h2><ul>
+<li>将系统分解，为了使之更易于理解</li>
+<li>进行复查（评审），和他人沟通，减少人为失误，提交代码质量</li>
+<li>将子程序写得短小，以减轻大脑负荷</li>
+<li>基于问题而不是底层实现细节来编程，从而减少工作量</li>
+<li>通过各种各样的规范，将思路从相对繁琐的编程事务中解放出来</li>
+</ul>
+<h2 id="求知欲"><a href="#求知欲" class="headerlink" title="求知欲"></a>求知欲</h2><ul>
+<li>每两个月阅读一本计算机热门书籍</li>
+<li>学习成功的项目开发经验</li>
+</ul>
+<h2 id="诚实"><a href="#诚实" class="headerlink" title="诚实"></a>诚实</h2><ul>
+<li>不是高手时不要假装自己是高手</li>
+<li>乐于承认错误</li>
+<li>力图理解编译器的警告，而非弃之不理</li>
+<li>透彻理解自己的程序，而不要只是编译看看能否运行</li>
+</ul>
+<h2 id="偷懒"><a href="#偷懒" class="headerlink" title="偷懒"></a>偷懒</h2><ul>
+<li>(Low)拖延不喜欢的任务</li>
+<li>(Good)迅速做完不喜欢的任务，以摆脱之</li>
+<li>(Cool)编写某个工具来完成不喜欢的任务，以便再也不用做这样的事情了</li>
+</ul>
+<h2 id="坚持"><a href="#坚持" class="headerlink" title="坚持"></a>坚持</h2><ul>
+<li>根据环境或场景的不同，坚持可能是财富，也可能是负担</li>
+</ul>
+<h2 id="习惯"><a href="#习惯" class="headerlink" title="习惯"></a>习惯</h2><ul>
+<li>习惯的力量</li>
+</ul>
+<h2 id="线上Bug"><a href="#线上Bug" class="headerlink" title="线上Bug"></a>线上Bug</h2><ul>
+<li>犯错不是罪过，从中学不到东西才是罪过</li>
+</ul>
+<h2 id="高质量业务代码"><a href="#高质量业务代码" class="headerlink" title="高质量业务代码"></a>高质量业务代码</h2><ul>
+<li>业务代码编写范式 </li>
+<li>常见的 js 业务场景分析以及解决思路</li>
+<li>解耦你的业务 js 代码，如何在业务中使用设计模式 </li>
+<li>常见的一些业务优化方法总结</li>
+<li>增加你的项目可维护性和代码可读性</li>
+</ul>
+<h2 id="代码书写层面优化"><a href="#代码书写层面优化" class="headerlink" title="代码书写层面优化"></a>代码书写层面优化</h2><p><strong>Bad</strong></p>
+<ul>
+<li>regxz.san</li>
+<li>appLine.san</li>
+<li>data.san</li>
+<li>…</li>
+</ul>
+<h2 id="命名的优化是最简单有效重构"><a href="#命名的优化是最简单有效重构" class="headerlink" title="命名的优化是最简单有效重构"></a>命名的优化是最简单有效重构</h2><ul>
+<li>找到更有表现力的词</li>
+<li>这个名字会被别人解读成其他的含义吗？</li>
+<li>bad: get , fetch / download</li>
+<li>stop: kill / pause </li>
+</ul>
+<pre><code><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">send: deliver dispatch annouce distribute route</span><br><span class="line">find: search extract locate recover</span><br><span class="line">start: lauch create begin open</span><br><span class="line">make: create <span class="builtin-name">set</span> up build generate compose <span class="builtin-name">add</span> new</span><br></pre></td></tr></table></figure>
+</code></pre><h3 id="把信息装到名字里"><a href="#把信息装到名字里" class="headerlink" title="把信息装到名字里"></a>把信息装到名字里</h3><ul>
+<li>选择专业的词<ul>
+<li>避免空泛的名字，像tmp和retval，除非使用它们有特殊的理由，使用专业的单词——例如，不用Get，而用Fetch或者Download可能会更好，这由上下文决定</li>
+</ul>
+</li>
+<li>避免泛泛的名字（或者说要知道什么时候使用它）<ul>
+<li>使用具体的名字来更细致地描述事物——ServerCanStart()这个名字就比CanListenOnPort更不清楚</li>
+</ul>
+</li>
+<li>用具体的名字代替抽象的名字<ul>
+<li>给变量名带上重要的细节——例如，在值为毫秒的变量后面加上ms，或者在还需要转义的，未处理的变量前面加上raw</li>
+</ul>
+</li>
+<li>使用前缀或后缀来给名字附带更多信息</li>
+<li>决定名字的长度<ul>
+<li>为作用域大的名字采用更长的名字——不要用让人费解的一个或两个字母的名字来命名在几屏之间都可见的变量。对于只存在于几行之间的变量用短一点的名字更好 </li>
+</ul>
+</li>
+<li>利用名字的格式来表达含义。<ul>
+<li>有目的地使用大小写、下划线等——例如，你可以在类成员和局部变量后面加上”_”来区分它们 </li>
+</ul>
+</li>
+</ul>
+<h2 id="代码逻辑层面优化"><a href="#代码逻辑层面优化" class="headerlink" title="代码逻辑层面优化"></a>代码逻辑层面优化</h2><h3 id="最小化嵌套"><a href="#最小化嵌套" class="headerlink" title="最小化嵌套"></a>最小化嵌套</h3><ul>
+<li>通过提早返回来减少嵌套</li>
+<li>在循环中，与提早返回类似的技术是continue：</li>
+</ul>
+<h3 id="拆分超长的表达式"><a href="#拆分超长的表达式" class="headerlink" title="拆分超长的表达式"></a>拆分超长的表达式</h3><ul>
+<li>用做解释的变量</li>
+<li>总结变量</li>
+<li><p>德摩根定理</p>
+  <figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">非<span class="comment">(P 且 Q)</span> = <span class="comment">(非 P)</span> 或 <span class="comment">(非 Q)</span></span><br><span class="line">非<span class="comment">(P 或 Q)</span> = <span class="comment">(非 P)</span> 且 <span class="comment">(非 Q)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>拆分巨大的语句</p>
+</li>
+</ul>
+<h3 id="缩小变量的作用域"><a href="#缩小变量的作用域" class="headerlink" title="缩小变量的作用域"></a>缩小变量的作用域</h3><ul>
+<li>使用“闭包”解决作用域问题</li>
+</ul>
+<h2 id="重新组织代码"><a href="#重新组织代码" class="headerlink" title="重新组织代码"></a>重新组织代码</h2><h3 id="抽取不相关的子问题"><a href="#抽取不相关的子问题" class="headerlink" title="抽取不相关的子问题"></a>抽取不相关的子问题</h3><ol>
+<li>看看某个函数或代码块，问问你自己：这段代码高层次的目标是什么？</li>
+<li>对于每一行代码，问一下：它是直接为了目标而工作吗？这段代码高层次的目标是什么呢？</li>
+<li>如果足够的行数在解决不相关的子问题，抽取代码到独立的函数中。</li>
+</ol>
+<h3 id="从逻辑到代码"><a href="#从逻辑到代码" class="headerlink" title="从逻辑到代码"></a>从逻辑到代码</h3><ol>
+<li>把想法变成代码，拿出纸和笔，从逻辑到函数的映射</li>
+<li>纯工具代码</li>
+<li>创建大量通用代码</li>
+</ol>
+<h3 id="使用npm包解决问题"><a href="#使用npm包解决问题" class="headerlink" title="使用npm包解决问题"></a>使用npm包解决问题</h3><ol>
+<li>date-fns</li>
+<li>share-config</li>
+<li>熟悉你周边的库</li>
+</ol>
+<h2 id="关注页面性能"><a href="#关注页面性能" class="headerlink" title="关注页面性能"></a>关注页面性能</h2><ul>
+<li>文件（图片、js文件）的大小</li>
+<li>是否请求太多</li>
+<li>后端响应速度</li>
+<li>…</li>
+</ul>
+<h2 id="代码评审"><a href="#代码评审" class="headerlink" title="代码评审"></a>代码评审</h2><ol>
+<li>代码阅读的顺畅感</li>
+<li>代码的重复性、复用性</li>
+<li>业务逻辑的理解性</li>
+<li>关键设计的遵循度</li>
+</ol>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://jinzhan.github.io/12/12/2018/编写高质量的前端业务代码/" title="编写高质量的前端业务代码" target="_blank" rel="external">http://jinzhan.github.io/12/12/2018/编写高质量的前端业务代码/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="null" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="null" target="_blank"><span class="text-dark">问津</span><small class="ml-1x">null</small></a></h3>
+        <div>世界上几乎所有的问题都可以用跳脱的想象力配合超凡的行动力来解决。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom="">
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/07/07/2019/way-of-thinking/" title="有哪些让人受益匪浅的思维方式？"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/11/26/2018/三国史话/" title="三国史话"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope="" itemtype="http://schema.org/WPFooter">
+	
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '1DdrXoTA2KwsbYEn3GHINqWX-gzGzoHsz',
+    appKey: 'BlpheQqBIUe2Tb7QSCTiLMs3',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
